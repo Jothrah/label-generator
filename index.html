@@ -76,6 +76,13 @@
       background: #e5e5e5;
     }
 
+    .field-note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 6px;
+      padding-right: 4px;
+    }
+
     .btn-row {
       display: flex;
       gap: 12px;
@@ -169,19 +176,29 @@
     .top-strip {
       direction: ltr;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      border: 1.8px solid #000;
+      grid-template-columns: 1fr 1fr 1fr;
+      border: 2px solid #000;
       margin: 4px 0 14px 0;
-      font-weight: 700;
-      font-size: 14px;
       text-align: center;
+      font-weight: 700;
+      font-size: 15px;
     }
 
-    .top-strip div {
-      padding: 5px 8px;
+    .cell {
+      padding: 6px;
+      border-left: 1px solid #000;
     }
 
-    .group-box {
+    .cell:first-child {
+      border-left: none;
+    }
+
+    .light {
+      background: #eee;
+      color: #000;
+    }
+
+    .dark {
       background: #000;
       color: #fff;
     }
@@ -345,11 +362,172 @@
       </div>
 
       <div class="field">
-        <input id="formulation" type="text" value="WP" placeholder="الهيئة">
+        <select id="formulation">
+          <option value="WP" selected>WP</option>
+          <option value="WG">WG</option>
+          <option value="SP">SP</option>
+          <option value="WDG">WDG</option>
+          <option value="SC">SC</option>
+          <option value="EC">EC</option>
+          <option value="SL">SL</option>
+          <option value="EW">EW</option>
+          <option value="OD">OD</option>
+          <option value="CS">CS</option>
+        </select>
+        <div class="field-note">هيئة المبيد قائمة اختيار</div>
       </div>
 
       <div class="field">
-        <input id="active_ar" type="text" value="إيميداكلوبريد" placeholder="المادة الفعالة بالعربي">
+        <select id="active_select">
+          <option value="Acetamiprid">Acetamiprid</option>
+          <option value="Alfa-Cypermethrin">Alfa-Cypermethrin</option>
+          <option value="Aluminium phosphide">Aluminium phosphide</option>
+          <option value="Azadirachtin">Azadirachtin</option>
+          <option value="Bacillus Thuringiensis Kurstaki">Bacillus Thuringiensis Kurstaki</option>
+          <option value="Bifenthrin">Bifenthrin</option>
+          <option value="Bistrifluron">Bistrifluron</option>
+          <option value="Buprofezin">Buprofezin</option>
+          <option value="Chlorantraniliprole">Chlorantraniliprole</option>
+          <option value="Chlorfluazuron">Chlorfluazuron</option>
+          <option value="Cyantraniliprole">Cyantraniliprole</option>
+          <option value="Cypermethrin">Cypermethrin</option>
+          <option value="Cyromazine">Cyromazine</option>
+          <option value="Deltamethrin">Deltamethrin</option>
+          <option value="Diflubenzuron">Diflubenzuron</option>
+          <option value="Dinotefuran">Dinotefuran</option>
+          <option value="Emamectin Benzoate">Emamectin Benzoate</option>
+          <option value="Esfenvalerate">Esfenvalerate</option>
+          <option value="Fenitrothion">Fenitrothion</option>
+          <option value="Fenpropathrin">Fenpropathrin</option>
+          <option value="Fipronil">Fipronil</option>
+          <option value="Flonicamid">Flonicamid</option>
+          <option value="Flometoquin">Flometoquin</option>
+          <option value="Flupyradifurone">Flupyradifurone</option>
+          <option value="Fluxametamide">Fluxametamide</option>
+          <option value="Imidacloprid" selected>Imidacloprid</option>
+          <option value="Indoxacarb">Indoxacarb</option>
+          <option value="Lambda cyhlothrin">Lambda cyhlothrin</option>
+          <option value="Lufenuron">Lufenuron</option>
+          <option value="Matrine">Matrine</option>
+          <option value="Metaflumizone">Metaflumizone</option>
+          <option value="Methoxyfenozide">Methoxyfenozide</option>
+          <option value="Paraffin-OIL">Paraffin-OIL</option>
+          <option value="Pyrethrins">Pyrethrins</option>
+          <option value="Pirimiphos methyl">Pirimiphos methyl</option>
+          <option value="Pyridalyl">Pyridalyl</option>
+          <option value="Pyrifluquinazon">Pyrifluquinazon</option>
+          <option value="Pyriproxyfen">Pyriproxyfen</option>
+          <option value="Spinetoram">Spinetoram</option>
+          <option value="Spinosad">Spinosad</option>
+          <option value="SPIROMESIFEN">SPIROMESIFEN</option>
+          <option value="Spirotetramat">Spirotetramat</option>
+          <option value="Sulfoxaflor">Sulfoxaflor</option>
+          <option value="Thiamethoxam">Thiamethoxam</option>
+          <option value="Thiocyclam Hydrogen Oxalate">Thiocyclam Hydrogen Oxalate</option>
+          <option value="Tolfenpyrad">Tolfenpyrad</option>
+          <option value="Tebufenozide">Tebufenozide</option>
+          <option value="Thiamethoxam +Abamectin+ Spinetoram Methoxyfenozide">Thiamethoxam +Abamectin+ Spinetoram Methoxyfenozide</option>
+          <option value="Bifenthrin + Abamectin">Bifenthrin + Abamectin</option>
+          <option value="Buprofezin + DeltamethrinBistrifluronAcetamiprid +Abamectin+ Cyantraniliprole">Buprofezin + DeltamethrinBistrifluronAcetamiprid +Abamectin+ Cyantraniliprole</option>
+          <option value="Bifenthrin Imidacloprid">Bifenthrin Imidacloprid</option>
+          <option value="Abamectin Imidacloprid">Abamectin Imidacloprid</option>
+          <option value="Indoxacarb +Emamectin Benzoate">Indoxacarb +Emamectin Benzoate</option>
+          <option value="Pyriproxyfen+ Emamectin Benzoat">Pyriproxyfen+ Emamectin Benzoat</option>
+          <option value="Lufenuron +Emamectin Benzoate">Lufenuron +Emamectin Benzoate</option>
+          <option value="Lambda-Cyhalothrin +Emamectin Benzoat">Lambda-Cyhalothrin +Emamectin Benzoat</option>
+          <option value="Chlorantraniliprole + Abamectin">Chlorantraniliprole + Abamectin</option>
+          <option value="Chlorantraniliprole +LambdaCyhalothrin">Chlorantraniliprole +LambdaCyhalothrin</option>
+          <option value="Thiamethoxam + Chlorantraniliprole">Thiamethoxam + Chlorantraniliprole</option>
+          <option value="Indoxacarb +Acetamiprid">Indoxacarb +Acetamiprid</option>
+          <option value="Thiamethoxam + Lambda-Cyhalothrin">Thiamethoxam + Lambda-Cyhalothrin</option>
+          <option value="Abamectin">Abamectin</option>
+          <option value="Acequinocyl Acrinathrin Bifenazate">Acequinocyl Acrinathrin Bifenazate</option>
+          <option value="Clofentezine">Clofentezine</option>
+          <option value="Cyenopyrafen">Cyenopyrafen</option>
+          <option value="Cyflumetofen">Cyflumetofen</option>
+          <option value="Etoxazole">Etoxazole</option>
+          <option value="Fenpyroximate">Fenpyroximate</option>
+          <option value="Hexythiazox">Hexythiazox</option>
+          <option value="Milbemectin Pyridaben">Milbemectin Pyridaben</option>
+          <option value="Bifenazate+ Etoxazole">Bifenazate+ Etoxazole</option>
+          <option value="Abamectin + Etoxazole">Abamectin + Etoxazole</option>
+          <option value="Abamectin + Bifenazate">Abamectin + Bifenazate</option>
+          <option value="Azoxystrobin">Azoxystrobin</option>
+          <option value="Bacillus Subtilis (QST713) )hydroxyquinoline sulphate-8Chinsol (">Bacillus Subtilis (QST713) )hydroxyquinoline sulphate-8Chinsol (</option>
+          <option value="Copper Hydroxide">Copper Hydroxide</option>
+          <option value="Copper Oxin">Copper Oxin</option>
+          <option value="Copper Oxychloride">Copper Oxychloride</option>
+          <option value="Cyazofamid">Cyazofamid</option>
+          <option value="Difenoconazole">Difenoconazole</option>
+          <option value="Fenpyrazamine">Fenpyrazamine</option>
+          <option value="Fenhexamid">Fenhexamid</option>
+          <option value="Penthiopyrad">Penthiopyrad</option>
+          <option value="Fludioxonil Flutianil Fosetyl Aluminum">Fludioxonil Flutianil Fosetyl Aluminum</option>
+          <option value="Hymexazol">Hymexazol</option>
+          <option value="Metalaxyl">Metalaxyl</option>
+          <option value="Metalaxyl M">Metalaxyl M</option>
+          <option value="Metalaxyl M+ COPPER HYDROXIDE">Metalaxyl M+ COPPER HYDROXIDE</option>
+          <option value="Metrafenone">Metrafenone</option>
+          <option value="Myclobutanil">Myclobutanil</option>
+          <option value="Penconazole">Penconazole</option>
+          <option value="Prochloraz">Prochloraz</option>
+          <option value="Propamocarb HCL">Propamocarb HCL</option>
+          <option value="Propiconazole">Propiconazole</option>
+          <option value="PYRIMETHANIL">PYRIMETHANIL</option>
+          <option value="Spiroxamine">Spiroxamine</option>
+          <option value="SULFUR">SULFUR</option>
+          <option value="Tebuconazole">Tebuconazole</option>
+          <option value="Tolclofos–Methyl">Tolclofos–Methyl</option>
+          <option value="Triadimenol">Triadimenol</option>
+          <option value="Trifloxystrobin+ Boscalid Pyraclostrobin + Famoxadone Cymoxanil + Propamocarb HCL Cymoxanil + Cyproconazole Azoxystrobin + Propiconazole Azoxystrobin + Metalaxyl M Difenoconazole + Difenoconazole Azoxystrobin + Trifloxystrobin Fluopyram + PropiconazoleDifenoconazole + Metalaxyl M Azoxystrobin + Difenoconazole Mandipropamid + Fludioxonil Cyprodinil + Flumorph Fosetyl Aluminum + Pyraclostrobin Dimethomorph+ Copper Oxychloride Metalaxyl + Copper Oxychloride Benalaxyl + Propamocarb Fosetyl Aluminum + Copper Oxychloride Cymoxanil+ Pydiflumetofen(Adepidyn)Difenoconazole + Famoxadone OXATHIAPIPROLIN">Trifloxystrobin+ Boscalid Pyraclostrobin + Famoxadone Cymoxanil + Propamocarb HCL Cymoxanil + Cyproconazole Azoxystrobin + Propiconazole Azoxystrobin + Metalaxyl M Difenoconazole + Difenoconazole Azoxystrobin + Trifloxystrobin Fluopyram + PropiconazoleDifenoconazole + Metalaxyl M Azoxystrobin + Difenoconazole Mandipropamid + Fludioxonil Cyprodinil + Flumorph Fosetyl Aluminum + Pyraclostrobin Dimethomorph+ Copper Oxychloride Metalaxyl + Copper Oxychloride Benalaxyl + Propamocarb Fosetyl Aluminum + Copper Oxychloride Cymoxanil+ Pydiflumetofen(Adepidyn)Difenoconazole + Famoxadone OXATHIAPIPROLIN</option>
+          <option value="Dimethomorph + Cymoxanil">Dimethomorph + Cymoxanil</option>
+          <option value="Mandipropamid + OXATHIAPIPROLIN">Mandipropamid + OXATHIAPIPROLIN</option>
+          <option value="Aclonifen">Aclonifen</option>
+          <option value="BENTAZONE">BENTAZONE</option>
+          <option value="Bromoxynil Octanoate">Bromoxynil Octanoate</option>
+          <option value="Clethodim">Clethodim</option>
+          <option value="Clomazone">Clomazone</option>
+          <option value="Cycloxydim">Cycloxydim</option>
+          <option value="Diquat Dibromide">Diquat Dibromide</option>
+          <option value="Florasulam">Florasulam</option>
+          <option value="Fluazifop-P-Butyl">Fluazifop-P-Butyl</option>
+          <option value="FLUMETSULAM">FLUMETSULAM</option>
+          <option value="GLUFOSINATE - AMMONIUM">GLUFOSINATE - AMMONIUM</option>
+          <option value="Glyphosate">Glyphosate</option>
+          <option value="IMAZAMOX">IMAZAMOX</option>
+          <option value="Imazethapyr">Imazethapyr</option>
+          <option value="Mesosulfuron-methyl+ lodosulfuron-methyl-sodium">Mesosulfuron-methyl+ lodosulfuron-methyl-sodium</option>
+          <option value="Metribuzin">Metribuzin</option>
+          <option value="Nicosulfuron">Nicosulfuron</option>
+          <option value="Rimsulfuron">Rimsulfuron</option>
+          <option value="Pendimethalin">Pendimethalin</option>
+          <option value="Pinoxaden">Pinoxaden</option>
+          <option value="PROMETRYN">PROMETRYN</option>
+          <option value="Prodiamine">Prodiamine</option>
+          <option value="Prosulfocarb">Prosulfocarb</option>
+          <option value="PYROXASULFONE Quizalofop-P-ethyl">PYROXASULFONE Quizalofop-P-ethyl</option>
+          <option value="SULFENTRAZONE">SULFENTRAZONE</option>
+          <option value="S- METOLACHLOR">S- METOLACHLOR</option>
+          <option value="Tribenuron Methyl">Tribenuron Methyl</option>
+          <option value="Bromoxynil Octanoate + Diflufenican">Bromoxynil Octanoate + Diflufenican</option>
+          <option value="Cinnamaldehyde">Cinnamaldehyde</option>
+          <option value="Fluopyram">Fluopyram</option>
+          <option value="Fosthiazate">Fosthiazate</option>
+          <option value="Imicyafos">Imicyafos</option>
+          <option value="Oxamyl">Oxamyl</option>
+          <option value="Metam-potassium">Metam-potassium</option>
+          <option value="Chlorpropham">Chlorpropham</option>
+          <option value="Trinexapac ethyl NAA) +-(1 naphthyl acetic acid-1 + Glycine gibberellic acidNAA)+-(1 naphthyl acetic acid-1 naphthyl acetamide -1 gibberellic acidMetaldehyde">Trinexapac ethyl NAA) +-(1 naphthyl acetic acid-1 + Glycine gibberellic acidNAA)+-(1 naphthyl acetic acid-1 naphthyl acetamide -1 gibberellic acidMetaldehyde</option>
+          <option value="Alcohol Ethoxylat, AlkylPhenol Ethoxylate">Alcohol Ethoxylat, AlkylPhenol Ethoxylate</option>
+          <option value="polyether Polysiloxane">polyether Polysiloxane</option>
+          <option value="Glycol Ethoxylate + Polydimethylsiloxane">Glycol Ethoxylate + Polydimethylsiloxane</option>
+          <option value="Hydrolysed proteins">Hydrolysed proteins</option>
+          <option value="(E,Z,Z)-3,8,11-Tetradecatrienyl acetate">(E,Z,Z)-3,8,11-Tetradecatrienyl acetate</option>
+          <option value="(3E;8Z;11Z)‐3, 8, tetradecantrien 1-y-1 acetate and (3E,8Z tetradecadien-1‐y 1- acetate ) , ( E,Z)‐3,8-tetradecatrienyl acetate +">(3E;8Z;11Z)‐3, 8, tetradecantrien 1-y-1 acetate and (3E,8Z tetradecadien-1‐y 1- acetate ) , ( E,Z)‐3,8-tetradecatrienyl acetate +</option>
+          <option value="(3E;8Z;11Z)‐3, 8, tetradecantrien 1-y-1 acetate and (3E,8Z tetradecadien-1‐y 1- acetate ) , ( E,Z)‐3,8-tetradecatrienyl acetate">(3E;8Z;11Z)‐3, 8, tetradecantrien 1-y-1 acetate and (3E,8Z tetradecadien-1‐y 1- acetate ) , ( E,Z)‐3,8-tetradecatrienyl acetate</option>
+          <option value="4-Methyl-5-Nonanol+ 4-Methyl-5-Nonanone:">4-Methyl-5-Nonanol+ 4-Methyl-5-Nonanone:</option>
+        </select>
+        <div class="field-note">اسم المادة الفعالة قائمة اختيار</div>
       </div>
 
       <div class="field">
@@ -372,63 +550,7 @@
       </div>
 
       <div class="field">
-        <textarea id="properties_text" placeholder="الخواص">مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP) يؤثر على الحشرات بالملامسة وعن طريق المعدة، يستخدم لمكافحة العديد من الآفات الحشرية التي تصيب الخضروات ونباتات الزينة في البيوت المحمية.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="mixing_text" placeholder="قابلية الخلط">يمكن خلطه مع عدد من المبيدات الحشرية ويجب الرش مباشرة بعد الخلط ويفضل عمل تجربة مصغرة قبل الخلط بكميات كبيرة.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="storage_text" placeholder="التخزين">يحفظ في عبواته الأصلية محكمة الإغلاق في مكان جاف جيد التهوية بعيداً عن مصادر الحرارة وأشعة الشمس المباشرة وبعيداً عن متناول الأطفال.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="effect_text" placeholder="الأثر على الإنسان والبيئة والحيوان">سام للإنسان والحيوان إذا ابتلع أو استنشق أو لامس العين أو الجلد، سام للأسماك والأحياء المائية كما أن المبيد شديد السمية على نحل العسل.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="symptoms_text" placeholder="أعراض التسمم">قد يحدث قيء تلقائي، اضطراب أعصاب، سيل اللعاب، ارتجاف أو رعشة في العضلات، تشنج.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="antidote_text" placeholder="مضاد التسمم">لا توجد جرعة مضادة ويتم العلاج حسب الأعراض الظاهرة.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="precautions_text" placeholder="الاحتياطات">• اتبع التعليمات المدونة على بطاقة المعلومات بدقة.
-• لبس الملابس الواقية عند خلط المبيد أو استخدامه.
-• تجنب استنشاق أبخرة أو غبار المبيد.
-• لا تأكل أو تشرب أو تدخن أثناء الاستخدام.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="disposal_text" placeholder="التخلص من العبوات">يمنع منعاً باتاً إعادة استخدام عبوات المبيد الفارغة لأي غرض كان ويجب غسل العبوة ثلاث مرات وإفراغها في خزان الرش والتخلص منها في الحاويات المخصصة لذلك.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="warranty_text" placeholder="الضمان">تضمن الشركة المنتج في عبواته الأصلية وذلك تحت ظروف التخزين المناسبة ولا تتحمل أي أضرار ناتجة عن سوء التخزين أو الاستخدام.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="first_aid_text" placeholder="الإسعافات الأولية">• في حالة ملامسته العينين: تغسل فوراً بالماء النظيف لمدة 15 دقيقة على الأقل.
-• في حالة ملامسته للجلد: تنزع الملابس الملوثة وتغسل أجزاء الجسم جيداً بالماء والصابون.
-• في حالة الاستنشاق: ينقل المصاب إلى منطقة جيدة التهوية بعيداً عن مكان التلوث ويستدعى الطبيب.
-• في حالة ابتلاع المبيد: يعطى المصاب 1 – 2 كأس من الماء.
-• في حالة التعرض للمبيد الاتصال على الرقم الموحد لوزارة الصحة 937.</textarea>
-      </div>
-
-      <div class="field">
-        <textarea id="note_text" placeholder="ملاحظة">• بعض نباتات الزينة حساسة للمبيد لذا يجب إجراء تجربة مصغرة لفحص الحساسية.
-• نظراً لسرعة صفة المقاومة للذباب الأبيض فإنه يفضل وضعه ضمن برنامج المكافحة المتكاملة بالتبادل مع المبيدات الأخرى.</textarea>
-      </div>
-
-      <div class="field">
-        <input id="rei_text" type="text" value="12 ساعة" placeholder="فترة إعادة الدخول">
-      </div>
-
-      <div class="field">
-        <input id="group_text" type="text" value="GROUP 4A" placeholder="المجموعة">
+        <input id="group_text" type="text" value="4A" placeholder="رمز المجموعة فقط">
       </div>
 
       <div class="field">
@@ -445,7 +567,6 @@
       <div class="sheet" id="labelSheet">
         <div class="columns">
 
-          <!-- العمود الأيسر -->
           <div class="col col-left">
             <h3 class="section-title">قابلية الخلط:</h3>
             <p class="section-text" id="out_mixing_text"></p>
@@ -474,7 +595,6 @@
             <div class="yellow-bar"></div>
           </div>
 
-          <!-- العمود الأوسط -->
           <div class="col col-middle">
             <h3 class="section-title">الخواص:</h3>
             <p class="section-text" id="out_properties_text"></p>
@@ -504,11 +624,11 @@
             <div class="yellow-bar"></div>
           </div>
 
-          <!-- العمود الأيمن -->
           <div class="col col-right">
             <div class="top-strip">
-              <div class="group-box" id="out_group_text">GROUP 4A</div>
-              <div id="out_pesticide_type_text">INSECTICIDE</div>
+              <div class="cell light">GROUP</div>
+              <div class="cell dark" id="out_group_value">4A</div>
+              <div class="cell light" id="out_pesticide_type_text">INSECTICIDE</div>
             </div>
 
             <div class="product-name-ar" id="out_trade_name_ar">أكوكيم 25% دبليو بي</div>
@@ -527,7 +647,7 @@
                 <th>Composition</th>
               </tr>
               <tr>
-                <td id="out_active_ar">إيميداكلوبريد</td>
+                <td id="out_active_ar">Imidacloprid</td>
                 <td id="out_concentration_ar">25%</td>
                 <td id="out_concentration_ratio">25%</td>
                 <td id="out_active_en">IMIDACLOPRID</td>
@@ -587,18 +707,34 @@
   </div>
 
   <script>
+    const STATIC_CONTENT = {
+      properties: "مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP) يؤثر على الحشرات بالملامسة وعن طريق المعدة، يستخدم لمكافحة العديد من الآفات الحشرية التي تصيب الخضروات ونباتات الزينة في البيوت المحمية.",
+      mixing: "يمكن خلطه مع عدد من المبيدات الحشرية ويجب الرش مباشرة بعد الخلط ويفضل عمل تجربة مصغرة قبل الخلط بكميات كبيرة.",
+      storage: "يحفظ في عبواته الأصلية محكمة الإغلاق في مكان جاف جيد التهوية بعيداً عن مصادر الحرارة وأشعة الشمس المباشرة وبعيداً عن متناول الأطفال.",
+      effect: "سام للإنسان والحيوان إذا ابتلع أو استنشق أو لامس العين أو الجلد، سام للأسماك والأحياء المائية كما أن المبيد شديد السمية على نحل العسل.",
+      symptoms: "قد يحدث قيء تلقائي، اضطراب أعصاب، سيل اللعاب، ارتجاف أو رعشة في العضلات، تشنج.",
+      antidote: "لا توجد جرعة مضادة ويتم العلاج حسب الأعراض الظاهرة.",
+      precautions: `• اتبع التعليمات المدونة على بطاقة المعلومات بدقة.
+• لبس الملابس الواقية عند خلط المبيد أو استخدامه.
+• تجنب استنشاق أبخرة أو غبار المبيد.
+• لا تأكل أو تشرب أو تدخن أثناء الاستخدام.`,
+      disposal: "يمنع منعاً باتاً إعادة استخدام عبوات المبيد الفارغة لأي غرض كان ويجب غسل العبوة ثلاث مرات وإفراغها في خزان الرش والتخلص منها في الحاويات المخصصة لذلك.",
+      warranty: "تضمن الشركة المنتج في عبواته الأصلية وذلك تحت ظروف التخزين المناسبة ولا تتحمل أي أضرار ناتجة عن سوء التخزين أو الاستخدام.",
+      firstAid: `• في حالة ملامسته العينين: تغسل فوراً بالماء النظيف لمدة 15 دقيقة على الأقل.
+• في حالة ملامسته للجلد: تنزع الملابس الملوثة وتغسل أجزاء الجسم جيداً بالماء والصابون.
+• في حالة الاستنشاق: ينقل المصاب إلى منطقة جيدة التهوية بعيداً عن مكان التلوث ويستدعى الطبيب.
+• في حالة ابتلاع المبيد: يعطى المصاب 1 – 2 كأس من الماء.
+• في حالة التعرض للمبيد الاتصال على الرقم الموحد لوزارة الصحة 937.`,
+      note: `• بعض نباتات الزينة حساسة للمبيد لذا يجب إجراء تجربة مصغرة لفحص الحساسية.
+• نظراً لسرعة صفة المقاومة للذباب الأبيض فإنه يفضل وضعه ضمن برنامج المكافحة المتكاملة بالتبادل مع المبيدات الأخرى.`,
+      rei: "12 ساعة"
+    };
+
     function escapeHtml(text) {
       return text
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;");
-    }
-
-    function textToParagraphs(text) {
-      const safe = escapeHtml(text);
-      const lines = safe.split("\n").filter(line => line.trim() !== "");
-      if (!lines.length) return "";
-      return lines.map(line => `<p class="section-text">${line}</p>`).join("");
     }
 
     function textToListOrParagraphs(text) {
@@ -622,35 +758,39 @@
       return document.getElementById(id).value.trim();
     }
 
+    function getArabicFormulationLabel(code) {
+      const map = {
+        WP: "دبليو بي",
+        WG: "دبليو جي",
+        SP: "إس بي",
+        WDG: "دبليو دي جي",
+        SC: "إس سي",
+        EC: "إي سي",
+        SL: "إس إل",
+        EW: "إي دبليو",
+        OD: "أو دي",
+        CS: "سي إس"
+      };
+      return map[code] || code;
+    }
+
     function generateLabel() {
       const tradeNameAr = getValue("trade_name_ar");
       const tradeNameEn = getValue("trade_name_en");
       const concentration = getValue("concentration");
       const formulation = getValue("formulation");
-      const activeAr = getValue("active_ar");
+      const activeSelected = getValue("active_select");
       const registrationMode = getValue("registration_mode");
       const registrationNumber = getValue("registration_number");
       const manufacturer = getValue("manufacturer");
       const agent = getValue("agent");
-      const propertiesText = getValue("properties_text");
-      const mixingText = getValue("mixing_text");
-      const storageText = getValue("storage_text");
-      const effectText = getValue("effect_text");
-      const symptomsText = getValue("symptoms_text");
-      const antidoteText = getValue("antidote_text");
-      const precautionsText = getValue("precautions_text");
-      const disposalText = getValue("disposal_text");
-      const warrantyText = getValue("warranty_text");
-      const firstAidText = getValue("first_aid_text");
-      const noteText = getValue("note_text");
-      const reiText = getValue("rei_text");
       const groupText = getValue("group_text");
       const pesticideTypeText = getValue("pesticide_type_text");
 
-      const finalNameAr = `${tradeNameAr} ${concentration} ${formulation === "WP" ? "دبليو بي" : formulation}`;
+      const formLabelAr = getArabicFormulationLabel(formulation);
+      const finalNameAr = `${tradeNameAr} ${concentration} ${formLabelAr}`.trim();
       const finalNameEn = `${tradeNameEn} ${concentration} ${formulation}`.trim();
-
-      const productDesc = `مبيد حشري جهازي على هيئة مسحوق قابل للبلل (${formulation})`;
+      const productDesc = `مبيد حشري جهازي على هيئة ${formulation === "WP" ? "مسحوق قابل للبلل" : formulation} (${formulation})`;
 
       let regValue = "( - - - )";
       if (registrationMode === "registered" && registrationNumber) {
@@ -658,39 +798,39 @@
       }
 
       const parsedPercent = parseFloat(concentration.replace("%", "").trim());
-      let additives = "";
+      let additives = "75%";
       if (!isNaN(parsedPercent)) {
         additives = `${100 - parsedPercent}%`;
       }
 
-      document.getElementById("out_group_text").textContent = groupText;
+      document.getElementById("out_group_value").textContent = groupText.replace("GROUP", "").trim();
       document.getElementById("out_pesticide_type_text").textContent = pesticideTypeText;
 
       document.getElementById("out_trade_name_ar").textContent = finalNameAr;
       document.getElementById("out_trade_name_en").textContent = finalNameEn;
       document.getElementById("out_product_desc").textContent = productDesc;
 
-      document.getElementById("out_active_ar").textContent = activeAr;
+      document.getElementById("out_active_ar").textContent = activeSelected;
       document.getElementById("out_concentration_ar").textContent = concentration;
       document.getElementById("out_concentration_ratio").textContent = concentration;
-      document.getElementById("out_active_en").textContent = activeAr.toUpperCase();
-      document.getElementById("out_additives_ar").textContent = additives || "75%";
-      document.getElementById("out_additives_ratio").textContent = additives || "75%";
+      document.getElementById("out_active_en").textContent = activeSelected.toUpperCase();
+      document.getElementById("out_additives_ar").textContent = additives;
+      document.getElementById("out_additives_ratio").textContent = additives;
 
-      document.getElementById("out_mixing_text").textContent = mixingText;
-      document.getElementById("out_storage_text").textContent = storageText;
-      document.getElementById("out_effect_text").textContent = effectText;
-      document.getElementById("out_symptoms_text").textContent = symptomsText;
-      document.getElementById("out_antidote_text").textContent = antidoteText;
-      document.getElementById("out_disposal_text").textContent = disposalText;
-      document.getElementById("out_warranty_text").textContent = warrantyText;
+      document.getElementById("out_mixing_text").textContent = STATIC_CONTENT.mixing;
+      document.getElementById("out_storage_text").textContent = STATIC_CONTENT.storage;
+      document.getElementById("out_effect_text").textContent = STATIC_CONTENT.effect;
+      document.getElementById("out_symptoms_text").textContent = STATIC_CONTENT.symptoms;
+      document.getElementById("out_antidote_text").textContent = STATIC_CONTENT.antidote;
+      document.getElementById("out_disposal_text").textContent = STATIC_CONTENT.disposal;
+      document.getElementById("out_warranty_text").textContent = STATIC_CONTENT.warranty;
 
-      document.getElementById("out_properties_text").textContent = propertiesText;
-      document.getElementById("out_rei_text").textContent = reiText;
+      document.getElementById("out_properties_text").textContent = STATIC_CONTENT.properties;
+      document.getElementById("out_rei_text").textContent = STATIC_CONTENT.rei;
 
-      document.getElementById("out_precautions_text").innerHTML = textToListOrParagraphs(precautionsText);
-      document.getElementById("out_note_text").innerHTML = textToListOrParagraphs(noteText);
-      document.getElementById("out_first_aid_text").innerHTML = textToListOrParagraphs(firstAidText);
+      document.getElementById("out_precautions_text").innerHTML = textToListOrParagraphs(STATIC_CONTENT.precautions);
+      document.getElementById("out_note_text").innerHTML = textToListOrParagraphs(STATIC_CONTENT.note);
+      document.getElementById("out_first_aid_text").innerHTML = textToListOrParagraphs(STATIC_CONTENT.firstAid);
 
       document.getElementById("out_registration_value").textContent = regValue;
       document.getElementById("out_manufacturer").textContent = manufacturer;
