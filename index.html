@@ -64,8 +64,7 @@
     }
 
     .field input,
-    .field select,
-    .field textarea {
+    .field select {
       width: 100%;
       border: 2px solid #cfcfcf;
       border-radius: 14px;
@@ -77,8 +76,7 @@
     }
 
     .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
+    .field select:focus {
       border-color: #999;
       background: #e5e5e5;
     }
@@ -276,13 +274,6 @@
 
     .product-name-wrap {
       margin-bottom: 8px;
-    }
-
-    .product-name-wrap.powder {
-      text-align: right;
-    }
-
-    .product-name-wrap.liquid {
       text-align: center;
     }
 
@@ -303,6 +294,7 @@
       margin: 0 0 8px 0;
       direction: ltr;
       word-break: break-word;
+      text-align: center;
     }
 
     .formulation-inline-ar {
@@ -354,6 +346,35 @@
       text-align: center;
     }
 
+    .warning-icons {
+      min-height: 54px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin: 8px 0 8px 0;
+    }
+
+    .warning-icon {
+      width: 54px;
+      height: 54px;
+      border: 3px solid #e74c3c;
+      transform: rotate(45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background: #fff;
+      color: #000;
+      flex: 0 0 auto;
+    }
+
+    .warning-icon span {
+      transform: rotate(-45deg);
+      display: inline-block;
+      line-height: 1;
+    }
+
     .warning-text {
       color: #ff1d1d;
       font-size: 13px;
@@ -370,6 +391,7 @@
       text-align: center;
       line-height: 1.2;
       margin: 6px 0 4px 0;
+      white-space: nowrap;
     }
 
     .reg-number {
@@ -715,8 +737,8 @@
               <div class="cell light" id="out_pesticide_type_text">INSECTICIDE</div>
             </div>
 
-            <div id="product_name_wrap" class="product-name-wrap powder">
-              <div class="product-name-ar" id="out_trade_name_ar">أكوكيم 25% <span class="formulation-inline-ar">(دبليو بي)</span></div>
+            <div class="product-name-wrap">
+              <div class="product-name-ar" id="out_trade_name_ar">أكوكيم 25% دبليو بي</div>
               <div class="product-name-en" id="out_trade_name_en">ACOCHEM 25% WP</div>
             </div>
 
@@ -763,6 +785,11 @@
               </tr>
             </table>
 
+            <div class="warning-icons">
+              <div class="warning-icon"><span>☠</span></div>
+              <div class="warning-icon"><span>🌳</span></div>
+            </div>
+
             <div class="warning-text">
               مبيد مقيد تحت إشراف فني مختص<br>
               يحفظ بعيداً عن متناول الأطفال
@@ -772,7 +799,7 @@
             <div id="out_first_aid_text" class="first-aid-small"></div>
 
             <div class="registration-alert">
-              في حالة التعرض للمبيد الاتصال على الرقم الموحد لوزارة الصحة 937
+              • في حالة التعرض للمبيد الاتصال على الرقم الموحد لوزارة الصحة ٩٣٧
             </div>
 
             <div class="reg-number">رقم التسجيل بالمملكة العربية السعودية</div>
@@ -833,15 +860,15 @@
     ];
 
     const CATEGORY_META = {
-      insecticide: { ar: "مبيد حشري", en: "INSECTICIDE", cats: ["المبيدات الحشرية"], defaultGroup: "4A" },
-      acaricide: { ar: "مبيد أكاروسي", en: "ACARICIDE", cats: ["المبيدات الأكاروسية"], defaultGroup: "—" },
-      fungicide: { ar: "مبيد فطري", en: "FUNGICIDE", cats: ["المبيدات الفطرية"], defaultGroup: "—" },
-      herbicide: { ar: "مبيد أعشاب", en: "HERBICIDE", cats: ["المبيدات العشبية"], defaultGroup: "—" },
-      nematicide: { ar: "مبيد نيماتودي", en: "NEMATICIDE", cats: ["المبيدات النيماتودية"], defaultGroup: "—" },
-      growth_regulator: { ar: "منظم نمو نباتي", en: "PLANT GROWTH REGULATOR", cats: ["منظمات النمو النباتية"], defaultGroup: "—" },
-      molluscicide: { ar: "مبيد قواقع", en: "MOLLUSCICIDE", cats: ["مبيدات القواقع"], defaultGroup: "—" },
-      adjuvant: { ar: "مادة مساعدة / ناشرة", en: "ADJUVANT", cats: ["المواد المساعدة والناشرة"], defaultGroup: "—" },
-      attractant_repellent: { ar: "مادة جاذبة / طاردة", en: "ATTRACTANT / REPELLENT", cats: ["المواد الجاذبة والطاردة"], defaultGroup: "—" }
+      insecticide: { ar: "مبيد حشري", en: "INSECTICIDE", cats: ["المبيدات الحشرية"] },
+      acaricide: { ar: "مبيد أكاروسي", en: "ACARICIDE", cats: ["المبيدات الأكاروسية"] },
+      fungicide: { ar: "مبيد فطري", en: "FUNGICIDE", cats: ["المبيدات الفطرية"] },
+      herbicide: { ar: "مبيد أعشاب", en: "HERBICIDE", cats: ["المبيدات العشبية"] },
+      nematicide: { ar: "مبيد نيماتودي", en: "NEMATICIDE", cats: ["المبيدات النيماتودية"] },
+      growth_regulator: { ar: "منظم نمو نباتي", en: "PLANT GROWTH REGULATOR", cats: ["منظمات النمو النباتية"] },
+      molluscicide: { ar: "مبيد قواقع", en: "MOLLUSCICIDE", cats: ["مبيدات القواقع"] },
+      adjuvant: { ar: "مادة مساعدة / ناشرة", en: "ADJUVANT", cats: ["المواد المساعدة والناشرة"] },
+      attractant_repellent: { ar: "مادة جاذبة / طاردة", en: "ATTRACTANT / REPELLENT", cats: ["المواد الجاذبة والطاردة"] }
     };
 
     const ACTIVE_INGREDIENTS = [
@@ -1214,7 +1241,7 @@
         .map(a => getAutoGroup(categoryKey, a.en))
         .filter(g => g && g !== "—");
       const unique = [...new Set(valid)];
-      return unique.length ? unique.join(" + ") : "—";
+      return unique.length ? unique.join(" ") : "—";
     }
 
     function generateLabel() {
@@ -1243,7 +1270,7 @@
       const categoryKey = getValue("pesticide_category");
       const categoryMeta = CATEGORY_META[categoryKey] || CATEGORY_META.insecticide;
 
-      const finalNameAr = `${tradeNameAr} ${totalPercentText} `;
+      const finalNameAr = `${tradeNameAr} ${totalPercentText} ${formulationAr}`.trim();
       const finalNameEn = `${tradeNameEn} ${totalPercentText} ${formulationCode}`.trim();
       const productDesc = buildProductDescription(categoryKey, formulationCode);
 
@@ -1257,20 +1284,13 @@
       const additivesText = formatPercentNumber(additives);
       const ratioUnit = getRatioUnit(formulationCode);
 
-      const powder = isPowderType(formulationCode);
-      const productWrap = document.getElementById("product_name_wrap");
-      productWrap.className = `product-name-wrap ${powder ? "powder" : "liquid"}`;
-
-      const groupValue = buildCombinedGroup(
+      document.getElementById("out_group_value").textContent = buildCombinedGroup(
         categoryKey,
         [active1, ...(hasSecond ? [active2] : []), ...(hasThird ? [active3] : [])]
       );
-
-      document.getElementById("out_group_value").textContent = groupValue;
       document.getElementById("out_pesticide_type_text").textContent = categoryMeta.en;
 
-      document.getElementById("out_trade_name_ar").innerHTML =
-        `${escapeHtml(finalNameAr)}<span class="formulation-inline-ar">(${escapeHtml(formulationAr)})</span>`;
+      document.getElementById("out_trade_name_ar").textContent = finalNameAr;
       document.getElementById("out_trade_name_en").textContent = finalNameEn;
       document.getElementById("out_product_desc").textContent = productDesc;
 
@@ -1311,7 +1331,7 @@
       document.getElementById("out_effect_text").textContent = STATIC_CONTENT.effect;
       document.getElementById("out_symptoms_text").textContent = STATIC_CONTENT.symptoms;
       document.getElementById("out_antidote_text").textContent = STATIC_CONTENT.antidote;
-      document.getElementById("out_disposal_text").textContent = powder ? STATIC_CONTENT.disposalPowder : STATIC_CONTENT.disposalLiquid;
+      document.getElementById("out_disposal_text").textContent = isPowderType(formulationCode) ? STATIC_CONTENT.disposalPowder : STATIC_CONTENT.disposalLiquid;
       document.getElementById("out_warranty_text").textContent = STATIC_CONTENT.warranty;
       document.getElementById("out_rei_text").textContent = STATIC_CONTENT.rei;
 
@@ -1353,6 +1373,7 @@
     });
 
     document.getElementById("formulation").addEventListener("change", generateLabel);
+
     document.getElementById("registration_mode").addEventListener("change", function () {
       updateRegistrationState();
       generateLabel();
