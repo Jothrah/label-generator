@@ -29,7 +29,7 @@
     }
 
     .form-card {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto 24px auto;
       background: #f3f3f3;
       border: 1px solid #d0d0d0;
@@ -307,13 +307,18 @@
       word-break: break-word;
     }
 
+    .formulation-inline-ar {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
     .product-desc {
       color: #ff1d1d;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       text-align: center;
       margin-bottom: 10px;
-      line-height: 1.3;
+      line-height: 1.25;
     }
 
     table {
@@ -334,6 +339,16 @@
 
     th {
       font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .composition-table {
+      font-size: 10px;
+    }
+
+    .composition-table th,
+    .composition-table td {
+      padding: 3px 4px;
     }
 
     .usage-table th,
@@ -354,12 +369,21 @@
       margin: 8px 0 10px 0;
     }
 
+    .registration-alert {
+      color: #ff1d1d;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.2;
+      margin: 6px 0 4px 0;
+    }
+
     .reg-number {
       color: #4a8f2f;
       font-weight: 700;
       font-size: 13px;
       text-align: center;
-      margin-top: 6px;
+      margin-top: 2px;
     }
 
     .reg-value {
@@ -369,6 +393,15 @@
       font-weight: 700;
       margin: 3px 0 10px 0;
       direction: ltr;
+    }
+
+    .production-table {
+      font-size: 10px;
+    }
+
+    .production-table th,
+    .production-table td {
+      padding: 3px 4px;
     }
 
     .footer-company {
@@ -405,6 +438,15 @@
       font-weight: 700;
     }
 
+    .first-aid-small {
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .first-aid-small .section-list li {
+      margin-bottom: 3px;
+    }
+
     .yellow-bar {
       position: absolute;
       right: 12px;
@@ -412,6 +454,10 @@
       bottom: 6px;
       height: 34px;
       background: #fff200;
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     .hidden-print {
@@ -466,40 +512,72 @@
 
       <div class="grid-2">
         <div class="field">
-          <label for="concentration">النسبة</label>
-          <input id="concentration" type="text" value="25%" placeholder="النسبة">
-        </div>
-
-        <div class="field">
           <label for="formulation">هيئة المبيد</label>
           <select id="formulation"></select>
           <div class="field-note" id="formulation_note"></div>
         </div>
-      </div>
 
-      <div class="field">
-        <label for="pesticide_category">فئة المبيد</label>
-        <select id="pesticide_category">
-          <option value="insecticide" selected>مبيد حشري</option>
-          <option value="acaricide">مبيد أكاروسي</option>
-          <option value="fungicide">مبيد فطري</option>
-          <option value="herbicide">مبيد أعشاب</option>
-          <option value="nematicide">مبيد نيماتودي</option>
-          <option value="growth_regulator">منظم نمو نباتي</option>
-          <option value="molluscicide">مبيد قواقع</option>
-          <option value="adjuvant">مادة مساعدة / ناشرة</option>
-          <option value="attractant_repellent">مادة جاذبة / طاردة</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="active_select">المادة الفعالة</label>
-        <select id="active_select" class="active-select"></select>
-        <div class="active-preview">
-          <div class="active-preview-ar" id="active_preview_ar">إيميداكلوبريد</div>
-          <div class="active-preview-en" id="active_preview_en">Imidacloprid</div>
+        <div class="field">
+          <label for="pesticide_category">فئة المبيد</label>
+          <select id="pesticide_category">
+            <option value="insecticide" selected>مبيد حشري</option>
+            <option value="acaricide">مبيد أكاروسي</option>
+            <option value="fungicide">مبيد فطري</option>
+            <option value="herbicide">مبيد أعشاب</option>
+            <option value="nematicide">مبيد نيماتودي</option>
+            <option value="growth_regulator">منظم نمو نباتي</option>
+            <option value="molluscicide">مبيد قواقع</option>
+            <option value="adjuvant">مادة مساعدة / ناشرة</option>
+            <option value="attractant_repellent">مادة جاذبة / طاردة</option>
+          </select>
         </div>
-        <div class="field-note">تظهر فقط المواد الفعالة التابعة للفئة المختارة</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="active_select">المادة الفعالة الأولى</label>
+          <select id="active_select" class="active-select"></select>
+          <div class="active-preview">
+            <div class="active-preview-ar" id="active_preview_ar">إيميداكلوبريد</div>
+            <div class="active-preview-en" id="active_preview_en">Imidacloprid</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="active1_percent">نسبة المادة الأولى</label>
+          <input id="active1_percent" type="number" step="0.01" value="25" placeholder="مثال 25">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>
+          <input type="checkbox" id="has_second_active" style="width:auto; margin-left:8px;">
+          يحتوي على مادة فعالة ثانية
+        </label>
+      </div>
+
+      <div id="second_active_block" class="hidden">
+        <div class="grid-2">
+          <div class="field">
+            <label for="active_select_2">المادة الفعالة الثانية</label>
+            <select id="active_select_2" class="active-select"></select>
+            <div class="active-preview">
+              <div class="active-preview-ar" id="active_preview_ar_2"></div>
+              <div class="active-preview-en" id="active_preview_en_2"></div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="active2_percent">نسبة المادة الثانية</label>
+            <input id="active2_percent" type="number" step="0.01" value="2" placeholder="مثال 2">
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="total_percent_display">النسبة الكلية المحسوبة</label>
+        <input id="total_percent_display" type="text" value="25%" readonly>
+        <div class="field-note">تُحسب من مجموع نسب المواد الفعالة</div>
       </div>
 
       <div class="grid-2">
@@ -536,7 +614,6 @@
           <span class="upload-filename" id="logo_filename">لم يتم اختيار ملف</span>
         </div>
         <input id="agent_logo" type="file" accept="image/*" style="display:none;">
-        <div class="field-note">بعد الرفع سيظهر الشعار تحت اسم الوكيل داخل النموذج</div>
       </div>
 
       <div class="btn-row">
@@ -614,38 +691,44 @@
             </div>
 
             <div id="product_name_wrap" class="product-name-wrap powder">
-              <div class="product-name-ar" id="out_trade_name_ar">أكوكيم 25%</div>
-              <div class="product-name-en" id="out_trade_name_en">ACOCHEM 25%</div>
+              <div class="product-name-ar" id="out_trade_name_ar">أكوكيم 25% <span class="formulation-inline-ar">(دبليو بي)</span></div>
+              <div class="product-name-en" id="out_trade_name_en">ACOCHEM 25% WP</div>
             </div>
 
             <div class="product-desc" id="out_product_desc">
               مبيد حشري على هيئة مسحوق قابل للبلل (WP)
             </div>
 
-            <table>
+            <table class="composition-table">
               <tr>
-                <th>التركيب:</th>
-                <th>النسبة</th>
-                <th>Ratio</th>
                 <th>Composition</th>
+                <th>Ratio</th>
+                <th>النسبة</th>
+                <th>التركيب:</th>
               </tr>
               <tr>
-                <td id="out_active_ar">إيميداكلوبريد</td>
-                <td id="out_concentration_ar">25%</td>
-                <td id="out_concentration_ratio">25%</td>
                 <td id="out_active_en">Imidacloprid</td>
+                <td id="out_concentration_ratio">25%</td>
+                <td id="out_concentration_ar">25%</td>
+                <td id="out_active_ar">إيميداكلوبريد</td>
+              </tr>
+              <tr id="second_active_row" class="hidden">
+                <td id="out_active_en_2"></td>
+                <td id="out_concentration_ratio_2"></td>
+                <td id="out_concentration_ar_2"></td>
+                <td id="out_active_ar_2"></td>
               </tr>
               <tr>
-                <td>مواد مضافة</td>
-                <td id="out_additives_ar">75%</td>
-                <td id="out_additives_ratio">75%</td>
                 <td>Additives</td>
+                <td id="out_additives_ratio">75%</td>
+                <td id="out_additives_ar">75%</td>
+                <td>مواد مضافة</td>
               </tr>
               <tr>
-                <td>المجموع</td>
-                <td>100%</td>
-                <td>100%</td>
                 <td>Total</td>
+                <td>100%</td>
+                <td>100%</td>
+                <td>المجموع</td>
               </tr>
             </table>
 
@@ -655,12 +738,16 @@
             </div>
 
             <h3 class="section-title">الإسعافات الأولية:</h3>
-            <div id="out_first_aid_text"></div>
+            <div id="out_first_aid_text" class="first-aid-small"></div>
+
+            <div class="registration-alert">
+              في حالة التعرض للمبيد الاتصال على الرقم الموحد لوزارة الصحة 937
+            </div>
 
             <div class="reg-number">رقم التسجيل بالمملكة العربية السعودية</div>
             <div class="reg-value" id="out_registration_value">( - - - )</div>
 
-            <table>
+            <table class="production-table">
               <tr>
                 <th>تاريخ الإنتاج</th>
                 <th>تاريخ الانتهاء</th>
@@ -693,14 +780,14 @@
   <script>
     const CATEGORY_META = {
       insecticide: { ar: "مبيد حشري", en: "INSECTICIDE", cats: ["المبيدات الحشرية"], defaultGroup: "4A" },
-      acaricide: { ar: "مبيد أكاروسي", en: "ACARICIDE", cats: ["المبيدات الأكاروسية"], defaultGroup: "" },
-      fungicide: { ar: "مبيد فطري", en: "FUNGICIDE", cats: ["المبيدات الفطرية"], defaultGroup: "" },
-      herbicide: { ar: "مبيد أعشاب", en: "HERBICIDE", cats: ["المبيدات العشبية"], defaultGroup: "" },
-      nematicide: { ar: "مبيد نيماتودي", en: "NEMATICIDE", cats: ["المبيدات النيماتودية"], defaultGroup: "" },
-      growth_regulator: { ar: "منظم نمو نباتي", en: "PLANT GROWTH REGULATOR", cats: ["منظمات النمو النباتية"], defaultGroup: "" },
-      molluscicide: { ar: "مبيد قواقع", en: "MOLLUSCICIDE", cats: ["مبيدات القواقع"], defaultGroup: "" },
-      adjuvant: { ar: "مادة مساعدة / ناشرة", en: "ADJUVANT", cats: ["المواد المساعدة والناشرة"], defaultGroup: "" },
-      attractant_repellent: { ar: "مادة جاذبة / طاردة", en: "ATTRACTANT / REPELLENT", cats: ["المواد الجاذبة والطاردة"], defaultGroup: "" }
+      acaricide: { ar: "مبيد أكاروسي", en: "ACARICIDE", cats: ["المبيدات الأكاروسية"], defaultGroup: "—" },
+      fungicide: { ar: "مبيد فطري", en: "FUNGICIDE", cats: ["المبيدات الفطرية"], defaultGroup: "—" },
+      herbicide: { ar: "مبيد أعشاب", en: "HERBICIDE", cats: ["المبيدات العشبية"], defaultGroup: "—" },
+      nematicide: { ar: "مبيد نيماتودي", en: "NEMATICIDE", cats: ["المبيدات النيماتودية"], defaultGroup: "—" },
+      growth_regulator: { ar: "منظم نمو نباتي", en: "PLANT GROWTH REGULATOR", cats: ["منظمات النمو النباتية"], defaultGroup: "—" },
+      molluscicide: { ar: "مبيد قواقع", en: "MOLLUSCICIDE", cats: ["مبيدات القواقع"], defaultGroup: "—" },
+      adjuvant: { ar: "مادة مساعدة / ناشرة", en: "ADJUVANT", cats: ["المواد المساعدة والناشرة"], defaultGroup: "—" },
+      attractant_repellent: { ar: "مادة جاذبة / طاردة", en: "ATTRACTANT / REPELLENT", cats: ["المواد الجاذبة والطاردة"], defaultGroup: "—" }
     };
 
     const FORMULATIONS = [
@@ -935,8 +1022,7 @@
       firstAid: `• في حالة ملامسته العينين: تغسل فوراً بالماء النظيف لمدة 15 دقيقة على الأقل.
 • في حالة ملامسته للجلد: تنزع الملابس الملوثة وتغسل أجزاء الجسم جيداً بالماء والصابون.
 • في حالة الاستنشاق: ينقل المصاب إلى منطقة جيدة التهوية بعيداً عن مكان التلوث ويستدعى الطبيب.
-• في حالة ابتلاع المبيد: يعطى المصاب 1 – 2 كأس من الماء حسب الإرشادات الطبية.
-• في حالة التعرض للمبيد الاتصال على الرقم الموحد لوزارة الصحة 937.`,
+• في حالة ابتلاع المبيد: يعطى المصاب 1 – 2 كأس من الماء حسب الإرشادات الطبية.`,
       note: `• يجب إجراء تجربة مصغرة قبل الاستخدام الواسع عند الحاجة.
 • يراعى إدخال المبيد ضمن برنامج مكافحة متكاملة والتبادل مع المبيدات الأخرى عند تكرار الاستخدام.`,
       rei: "12 ساعة"
@@ -965,25 +1051,36 @@
       return CATEGORY_META[key] || CATEGORY_META.insecticide;
     }
 
-    function initOrRefreshActiveIngredients() {
-      const select = document.getElementById("active_select");
-      const meta = getSelectedCategoryMeta();
-      const filtered = ACTIVE_INGREDIENTS.filter(item => meta.cats.includes(item.cat));
-
+    function fillActiveSelect(selectId, filtered, defaultEnglish = "") {
+      const select = document.getElementById(selectId);
       let html = "";
       filtered.forEach((item, idx) => {
         const value = encodeURIComponent(JSON.stringify(item));
-        html += `<option value="${value}" ${idx === 0 ? "selected" : ""}>${item.en} — ${item.ar}</option>`;
+        const selected = item.en === defaultEnglish || (!defaultEnglish && idx === 0) ? "selected" : "";
+        html += `<option value="${value}" ${selected}>${item.en} — ${item.ar}</option>`;
       });
-
       select.innerHTML = html;
+    }
+
+    function initOrRefreshActiveIngredients() {
+      const meta = getSelectedCategoryMeta();
+      const filtered = ACTIVE_INGREDIENTS.filter(item => meta.cats.includes(item.cat));
+      fillActiveSelect("active_select", filtered, "Imidacloprid");
+      fillActiveSelect("active_select_2", filtered, filtered[1] ? filtered[1].en : "");
       updateActivePreview();
+      updateActivePreview2();
     }
 
     function updateActivePreview() {
-      const active = getSelectedActive();
+      const active = getSelectedActive("active_select");
       document.getElementById("active_preview_ar").textContent = active.ar || "";
       document.getElementById("active_preview_en").textContent = active.en || "";
+    }
+
+    function updateActivePreview2() {
+      const active = getSelectedActive("active_select_2");
+      document.getElementById("active_preview_ar_2").textContent = active.ar || "";
+      document.getElementById("active_preview_en_2").textContent = active.en || "";
     }
 
     function escapeHtml(text) {
@@ -1011,8 +1108,19 @@
       return document.getElementById(id).value.trim();
     }
 
-    function getSelectedActive() {
-      const raw = document.getElementById("active_select").value;
+    function getNumberValue(id) {
+      const raw = document.getElementById(id).value.trim();
+      const num = parseFloat(raw);
+      return isNaN(num) ? 0 : num;
+    }
+
+    function formatPercentNumber(num) {
+      if (Number.isInteger(num)) return `${num}%`;
+      return `${num.toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1")}%`;
+    }
+
+    function getSelectedActive(selectId) {
+      const raw = document.getElementById(selectId).value;
       try {
         return JSON.parse(decodeURIComponent(raw));
       } catch {
@@ -1034,6 +1142,21 @@
       const input = document.getElementById("registration_number");
       input.disabled = mode !== "registered";
       if (mode !== "registered") input.value = "";
+    }
+
+    function updateSecondActiveState() {
+      const checked = document.getElementById("has_second_active").checked;
+      document.getElementById("second_active_block").classList.toggle("hidden", !checked);
+      calculateTotalPercent();
+    }
+
+    function calculateTotalPercent() {
+      const p1 = getNumberValue("active1_percent");
+      const hasSecond = document.getElementById("has_second_active").checked;
+      const p2 = hasSecond ? getNumberValue("active2_percent") : 0;
+      const total = p1 + p2;
+      document.getElementById("total_percent_display").value = formatPercentNumber(total);
+      return total;
     }
 
     function getAutoGroup(categoryKey, activeEn) {
@@ -1064,35 +1187,10 @@
         "Cypermethrin": "3A",
         "Deltamethrin": "3A",
         "Alfa-Cypermethrin": "3A",
-        "Lambda cyhlothrin": "3A",
-        "Lambda-Cyhalothrin + Emamectin Benzoate": "3A + 6",
-        "Thiamethoxam + Lambda-Cyhalothrin": "4A + 3A",
-        "Imidacloprid + Bifenthrin": "4A + 3A",
-        "Imidacloprid + Abamectin": "4A + 6",
-        "Bifenthrin + Abamectin": "3A + 6",
-        "Thiamethoxam + Abamectin": "4A + 6",
-        "Methoxyfenozide + Spinetoram": "18 + 5",
-        "Cyantraniliprole + Abamectin": "28 + 6",
-        "Indoxacarb + Emamectin Benzoate": "22A + 6",
-        "Lufenuron + Emamectin Benzoate": "15 + 6",
-        "Pyriproxyfen + Emamectin Benzoate": "7C + 6",
-        "Thiamethoxam + Chlorantraniliprole": "4A + 28",
-        "Chlorantraniliprole + Abamectin": "28 + 6",
-        "Chlorantraniliprole + LambdaCyhalothrin": "28 + 3A",
-        "Indoxacarb + Acetamiprid": "22A + 4A",
-        "Acetamiprid + Bistrifluron": "4A + 15",
-        "Buprofezin + Deltamethrin": "16 + 3A"
+        "Lambda cyhlothrin": "3A"
       };
 
       if (categoryKey === "insecticide") return insecticideGroups[activeEn] || "—";
-      if (categoryKey === "acaricide") return "—";
-      if (categoryKey === "fungicide") return "—";
-      if (categoryKey === "herbicide") return "—";
-      if (categoryKey === "nematicide") return "—";
-      if (categoryKey === "growth_regulator") return "—";
-      if (categoryKey === "molluscicide") return "—";
-      if (categoryKey === "adjuvant") return "—";
-      if (categoryKey === "attractant_repellent") return "—";
       return "—";
     }
 
@@ -1106,9 +1204,15 @@
     function generateLabel() {
       const tradeNameAr = getValue("trade_name_ar");
       const tradeNameEn = getValue("trade_name_en");
-      const concentration = getValue("concentration");
       const formulation = getValue("formulation");
-      const active = getSelectedActive();
+      const active1 = getSelectedActive("active_select");
+      const hasSecond = document.getElementById("has_second_active").checked;
+      const active2 = hasSecond ? getSelectedActive("active_select_2") : { en: "", ar: "" };
+      const p1 = getNumberValue("active1_percent");
+      const p2 = hasSecond ? getNumberValue("active2_percent") : 0;
+      const totalPercent = p1 + p2;
+      const totalPercentText = formatPercentNumber(totalPercent);
+
       const registrationMode = getValue("registration_mode");
       const registrationNumber = getValue("registration_number");
       const manufacturer = getValue("manufacturer");
@@ -1116,8 +1220,11 @@
       const categoryKey = getValue("pesticide_category");
       const categoryMeta = CATEGORY_META[categoryKey] || CATEGORY_META.insecticide;
 
-      const finalNameAr = `${tradeNameAr} ${concentration}`.trim();
-      const finalNameEn = `${tradeNameEn} ${concentration}`.trim();
+      const formulationInfo = getSelectedFormulation();
+      const formulationAr = formulationInfo ? formulationInfo.ar : formulation;
+
+      const finalNameAr = `${tradeNameAr} ${totalPercentText} `;
+      const finalNameEn = `${tradeNameEn} ${totalPercentText} ${formulation}`.trim();
       const productDesc = buildProductDescription(categoryKey, formulation);
 
       let regValue = "( - - - )";
@@ -1125,32 +1232,47 @@
         regValue = registrationNumber;
       }
 
-      const parsedPercent = parseFloat(concentration.replace("%", "").trim());
-      let additives = "—";
-      if (!isNaN(parsedPercent)) {
-        additives = `${Math.max(0, 100 - parsedPercent)}%`;
-      }
+      let additives = 100 - totalPercent;
+      if (additives < 0) additives = 0;
+      const additivesText = formatPercentNumber(additives);
 
       const powder = isPowderType(formulation);
       const productWrap = document.getElementById("product_name_wrap");
-
       productWrap.className = `product-name-wrap ${powder ? "powder" : "liquid"}`;
 
-      document.getElementById("out_group_value").textContent = getAutoGroup(categoryKey, active.en);
+      const autoGroup1 = getAutoGroup(categoryKey, active1.en);
+      const autoGroup2 = hasSecond ? getAutoGroup(categoryKey, active2.en) : "";
+      let finalGroup = autoGroup1;
+      if (hasSecond && autoGroup2 && autoGroup2 !== "—" && autoGroup2 !== autoGroup1) {
+        finalGroup = `${autoGroup1} + ${autoGroup2}`;
+      }
+
+      document.getElementById("out_group_value").textContent = finalGroup || "—";
       document.getElementById("out_pesticide_type_text").textContent = categoryMeta.en;
 
-      document.getElementById("out_trade_name_ar").textContent = finalNameAr;
+      document.getElementById("out_trade_name_ar").innerHTML = `${escapeHtml(finalNameAr)}<span class="formulation-inline-ar">(${escapeHtml(formulationAr)})</span>`;
       document.getElementById("out_trade_name_en").textContent = finalNameEn;
       document.getElementById("out_product_desc").textContent = productDesc;
 
-      document.getElementById("out_active_ar").textContent = active.ar || active.en;
-      document.getElementById("out_concentration_ar").textContent = concentration;
-      document.getElementById("out_concentration_ratio").textContent = concentration;
-      document.getElementById("out_active_en").textContent = active.en || "";
-      document.getElementById("out_additives_ar").textContent = additives;
-      document.getElementById("out_additives_ratio").textContent = additives;
+      document.getElementById("out_active_ar").textContent = active1.ar || active1.en;
+      document.getElementById("out_concentration_ar").textContent = formatPercentNumber(p1);
+      document.getElementById("out_concentration_ratio").textContent = formatPercentNumber(p1);
+      document.getElementById("out_active_en").textContent = active1.en || "";
 
-      const formulationInfo = getSelectedFormulation();
+      const secondRow = document.getElementById("second_active_row");
+      if (hasSecond) {
+        secondRow.classList.remove("hidden");
+        document.getElementById("out_active_ar_2").textContent = active2.ar || active2.en;
+        document.getElementById("out_concentration_ar_2").textContent = formatPercentNumber(p2);
+        document.getElementById("out_concentration_ratio_2").textContent = formatPercentNumber(p2);
+        document.getElementById("out_active_en_2").textContent = active2.en || "";
+      } else {
+        secondRow.classList.add("hidden");
+      }
+
+      document.getElementById("out_additives_ar").textContent = additivesText;
+      document.getElementById("out_additives_ratio").textContent = additivesText;
+
       const dynamicProperties = formulationInfo
         ? `${categoryMeta.ar} ${formulationInfo.def}`
         : `${categoryMeta.ar} على هيئة (${formulation})`;
@@ -1222,10 +1344,36 @@
       generateLabel();
     });
 
-    initFormulations();
-    initOrRefreshActiveIngredients();
-    updateRegistrationState();
-    generateLabel();
+    document.getElementById("active_select_2").addEventListener("change", function () {
+      updateActivePreview2();
+      generateLabel();
+    });
+
+    document.getElementById("has_second_active").addEventListener("change", function () {
+      updateSecondActiveState();
+      generateLabel();
+    });
+
+    document.getElementById("active1_percent").addEventListener("input", function () {
+      calculateTotalPercent();
+      generateLabel();
+    });
+
+    document.getElementById("active2_percent").addEventListener("input", function () {
+      calculateTotalPercent();
+      generateLabel();
+    });
+
+    function init() {
+      initFormulations();
+      initOrRefreshActiveIngredients();
+      updateRegistrationState();
+      updateSecondActiveState();
+      calculateTotalPercent();
+      generateLabel();
+    }
+
+    init();
   </script>
 </body>
 </html>
