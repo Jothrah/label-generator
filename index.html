@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نموذج تجريبي لإنشاء ملصق مبيد</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f3f5f8;
+      color: #1f2937;
+    }
+    .container {
+      width: min(1400px, 96%);
+      margin: 24px auto;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .panel, .preview {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .panel-header, .preview-header {
+      background: #0b2c6b;
+      color: #fff;
+      padding: 16px 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .panel-body {
+      padding: 18px;
+    }
+    .field {
+      margin-bottom: 14px;
+    }
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #111827;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 14px;
+      background: #fff;
+    }
+    .field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-primary {
+      background: #0b2c6b;
+      color: white;
+    }
+    .btn-secondary {
+      background: #10b981;
+      color: white;
+    }
+    .btn-light {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .preview-body {
+      padding: 22px;
+      background: #f9fafb;
+    }
+
+    .label-sheet {
+      width: 100%;
+      background: white;
+      border: 2px solid #d1d5db;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .top-band {
+      display: grid;
+      grid-template-columns: 1fr 120px 1fr;
+      text-align: center;
+      border: 2px solid #1f2937;
+      overflow: hidden;
+      border-radius: 8px;
+      margin-bottom: 18px;
+    }
+    .top-band div {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 20px;
+      background: #fff;
+    }
+    .top-band .group-no {
+      background: #0b2c6b;
+      color: #fff;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    .hero-box {
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 210px;
+      background: #fff;
+    }
+
+    .hero-box h2 {
+      margin: 0 0 10px;
+      color: #0b2c6b;
+      font-size: 28px;
+    }
+
+    .meta-line {
+      margin: 8px 0;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    .meta-line span {
+      color: #0b2c6b;
+      font-weight: bold;
+    }
+
+    .section {
+      margin-top: 18px;
+      border: 1px solid #dbe2ea;
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .section-title {
+      background: #0b2c6b;
+      color: #fff;
+      padding: 12px 16px;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .section-content {
+      padding: 14px 16px;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .usage-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+
+    .usage-table th, .usage-table td {
+      border: 1px solid #cbd5e1;
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    .usage-table th {
+      background: #0b2c6b;
+      color: white;
+      font-size: 16px;
+    }
+
+    .usage-table td.crop {
+      background: #10b981;
+      color: #fff;
+      font-weight: bold;
+      width: 18%;
+      text-align: center;
+    }
+
+    .company-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .note {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: #fff8db;
+      border: 1px solid #f3d25c;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 1100px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .company-grid, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <div class="panel-header">نموذج إدخال الملصق</div>
+      <div class="panel-body">
+        <div class="field">
+          <label for="tradeNameAr">الاسم التجاري بالعربي</label>
+          <input id="tradeNameAr" value="أكوكيم 25% دبليو بي" />
+        </div>
+
+        <div class="field">
+          <label for="tradeNameEn">الاسم التجاري بالإنجليزي</label>
+          <input id="tradeNameEn" value="ACOCHEM 25% WP" />
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="ingredientSelect">المادة الفعالة</label>
+            <select id="ingredientSelect"></select>
+          </div>
+
+          <div class="field">
+            <label for="formulationSelect">التركيبة</label>
+            <select id="formulationSelect"></select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="manufacturer">إنتاج</label>
+            <input id="manufacturer" value="شركة فابكو" />
+          </div>
+          <div class="field">
+            <label for="agent">الوكيل الحصري</label>
+            <input id="agent" value="التكامل الوطنية للزراعة" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="address">العنوان</label>
+            <input id="address" value="الرياض، المملكة العربية السعودية" />
+          </div>
+          <div class="field">
+            <label for="email">البريد الإلكتروني</label>
+            <input id="email" value="info@example.com" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="batchNo">رقم الدفعة</label>
+            <input id="batchNo" value="B-2026-001" />
+          </div>
+          <div class="field">
+            <label for="packSize">حجم العبوة</label>
+            <input id="packSize" value="1 كجم" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="prodDate">تاريخ الإنتاج</label>
+            <input id="prodDate" value="2026-03-01" />
+          </div>
+          <div class="field">
+            <label for="expDate">تاريخ الانتهاء</label>
+            <input id="expDate" value="2028-03-01" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="propertiesText">خواص المبيد</label>
+          <textarea id="propertiesText"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="mixingText">قابلية الخلط</label>
+          <textarea id="mixingText"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="storageText">التخزين</label>
+          <textarea id="storageText"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="envText">الأثر على الإنسان والبيئة والحيوان</label>
+          <textarea id="envText"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="precautionsText">الاحتياطات</label>
+          <textarea id="precautionsText"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-primary" onclick="generateLabel()">إنشاء المعاينة</button>
+          <button class="btn-secondary" onclick="window.print()">طباعة / PDF</button>
+          <button class="btn-light" onclick="resetDemo()">إعادة البيانات التجريبية</button>
+        </div>
+
+        <div class="note">
+          هذا نموذج تجريبي فقط.  
+          لاحقًا نربطه بقاعدة بيانات حقيقية بحيث تُسحب النصوص والجداول تلقائيًا حسب المادة الفعالة والتركيز والهيئة.
+        </div>
+      </div>
+    </div>
+
+    <div class="preview">
+      <div class="preview-header">معاينة الملصق</div>
+      <div class="preview-body">
+        <div class="label-sheet" id="labelPreview"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const db = {
+      ingredients: [
+        {
+          id: 1,
+          nameAr: "إيميداكلوبريد",
+          nameEn: "Imidacloprid",
+          chemicalGroupAr: "نيونيكوتينويد",
+          chemicalGroupEn: "Neonicotinoid",
+          pesticideCategoryAr: "مبيد حشري",
+          pesticideCategoryEn: "Insecticide",
+          modeOfActionGroup: "4A",
+          restrictedUse: "نعم",
+          reiHours: 12,
+          formulations: [
+            {
+              id: 101,
+              concentration: "25%",
+              code: "WP",
+              formulationNameAr: "مسحوق قابل للبلل",
+              formulationNameEn: "Wettable Powder",
+              compositionAr: "إيميداكلوبريد 25% وزن/وزن",
+              propertiesAr: "مبيد حشري جهازي على هيئة مسحوق قابل للبلل، يعمل بالملامسة وعن طريق المعدة، ويُستخدم لمكافحة عدد من الآفات الحشرية على الخضروات ونباتات الزينة.",
+              mixingAr: "يمكن خلطه مع عدد من المبيدات الحشرية، ويُفضّل إجراء تجربة مصغّرة قبل الخلط بكميات كبيرة.",
+              storageAr: "يحفظ في عبواته الأصلية محكمة الإغلاق في مكان بارد وجاف وجيد التهوية بعيدًا عن أشعة الشمس المباشرة والأطفال والأغذية والأعلاف والأسمدة.",
+              envAr: "سام للإنسان والحيوان عند الابتلاع أو الاستنشاق أو ملامسة العين أو الجلد، وسام للأسماك والأحياء المائية وشديد السمية على النحل.",
+              precautionsAr: "اتبع التعليمات المدونة على البطاقة، وارتدِ معدات الوقاية الشخصية عند الخلط والاستخدام، وتجنب الرش أثناء الرياح أو توقع هطول الأمطار.",
+              firstAidAr: "في حالة ملامسة العين تغسل بالماء لمدة 15 دقيقة، وفي حالة الابتلاع يعطى المصاب ماء ويطلب التدخل الطبي فورًا.",
+              antidoteAr: "لا يوجد ترياق نوعي ويكون العلاج حسب الأعراض.",
+              disposalAr: "تتلف العبوات الفارغة بعد غسلها ثلاث مرات والتخلص منها وفق التعليمات المعتمدة.",
+              warrantyAr: "تضمن الشركة المنتج في عبواته الأصلية تحت ظروف التخزين المناسبة ولا تتحمل سوء التخزين أو سوء الاستخدام.",
+              usage: [
+                {
+                  crop: "الخضروات",
+                  target: "المن، صانعات الأنفاق، التربس",
+                  dose: "20 - 40 جم / 100 لتر ماء",
+                  phi: "7 أيام",
+                  timing: "عند ظهور الإصابة وبحسب التوصيات الفنية"
+                },
+                {
+                  crop: "نباتات الزينة",
+                  target: "المن، الذبابة البيضاء، التربس، البق الدقيقي",
+                  dose: "100 جم / 100 لتر ماء",
+                  phi: "---",
+                  timing: "عند ظهور الإصابة"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 2,
+          nameAr: "أكلونيفين",
+          nameEn: "Aclonifen",
+          chemicalGroupAr: "دايفينيل إيثر",
+          chemicalGroupEn: "Diphenyl ether",
+          pesticideCategoryAr: "مبيد أعشاب",
+          pesticideCategoryEn: "Herbicide",
+          modeOfActionGroup: "32",
+          restrictedUse: "لا",
+          reiHours: 12,
+          formulations: [
+            {
+              id: 201,
+              concentration: "60%",
+              code: "SC",
+              formulationNameAr: "مركز معلق",
+              formulationNameEn: "Suspension Concentrate",
+              compositionAr: "أكلونيفين 60% إس سي",
+              propertiesAr: "مبيد أعشاب جهازي اختياري، يستخدم لمكافحة الأعشاب عريضة ورفيعة الأوراق قبل الإنبات.",
+              mixingAr: "لا يخلط إلا بعد اختبار توافق مصغر وتحت إشراف فني.",
+              storageAr: "يحفظ في العبوة الأصلية في مكان جيد التهوية بعيدًا عن الحرارة المباشرة.",
+              envAr: "يراعى عدم تلويث مصادر المياه أو تعريض الكائنات غير المستهدفة للمبيد.",
+              precautionsAr: "يلتزم بمعدات الوقاية الشخصية وتعليمات الاستخدام المسجلة.",
+              firstAidAr: "تتبع تعليمات بطاقة السلامة عند التعرض.",
+              antidoteAr: "العلاج عرضي حسب الحالة.",
+              disposalAr: "تتلف العبوات الفارغة حسب الأنظمة المحلية.",
+              warrantyAr: "تضمن الشركة جودة المنتج في العبوة الأصلية وتحت ظروف التخزين المناسبة.",
+              usage: [
+                {
+                  crop: "البصل",
+                  target: "الأعشاب الحولية",
+                  dose: "1 لتر / هكتار",
+                  phi: "---",
+                  timing: "بعد الزراعة وقبل الإنبات، معاملة واحدة فقط خلال الموسم"
+                },
+                {
+                  crop: "الجزر",
+                  target: "الأعشاب الحولية",
+                  dose: "2.5 لتر / هكتار",
+                  phi: "---",
+                  timing: "بعد الزراعة حتى ما قبل ظهور النباتات"
+                },
+                {
+                  crop: "البطاطس",
+                  target: "الأعشاب الحولية",
+                  dose: "3 لتر / هكتار",
+                  phi: "---",
+                  timing: "بعد الزراعة وقبل إنبات المحصول وبعد الانتهاء من التحضين"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const ingredientSelect = document.getElementById("ingredientSelect");
+    const formulationSelect = document.getElementById("formulationSelect");
+
+    function loadIngredients() {
+      ingredientSelect.innerHTML = db.ingredients.map(item =>
+        `<option value="${item.id}">${item.nameAr} - ${item.nameEn}</option>`
+      ).join("");
+      loadFormulations();
+    }
+
+    function loadFormulations() {
+      const ingredient = getSelectedIngredient();
+      formulationSelect.innerHTML = ingredient.formulations.map(f =>
+        `<option value="${f.id}">${f.concentration} ${f.code}</option>`
+      ).join("");
+      fillTextsFromSelection();
+    }
+
+    function getSelectedIngredient() {
+      const id = Number(ingredientSelect.value);
+      return db.ingredients.find(i => i.id === id);
+    }
+
+    function getSelectedFormulation() {
+      const ingredient = getSelectedIngredient();
+      const fid = Number(formulationSelect.value);
+      return ingredient.formulations.find(f => f.id === fid);
+    }
+
+    function fillTextsFromSelection() {
+      const f = getSelectedFormulation();
+      document.getElementById("propertiesText").value = f.propertiesAr || "";
+      document.getElementById("mixingText").value = f.mixingAr || "";
+      document.getElementById("storageText").value = f.storageAr || "";
+      document.getElementById("envText").value = f.envAr || "";
+      document.getElementById("precautionsText").value = f.precautionsAr || "";
+
+      const ingredient = getSelectedIngredient();
+      document.getElementById("tradeNameAr").value =
+        ingredient.id === 1 ? "أكوكيم 25% دبليو بي" : "أكلونيفين 60% إس سي";
+      document.getElementById("tradeNameEn").value =
+        ingredient.id === 1 ? "ACOCHEM 25% WP" : "Aclonifen 60% SC";
+
+      generateLabel();
+    }
+
+    function nl2br(text) {
+      return (text || "").replace(/\n/g, "<br>");
+    }
+
+    function generateUsageRows(usage) {
+      return usage.map(row => `
+        <tr>
+          <td class="crop">${row.crop}</td>
+          <td>${row.target}</td>
+          <td>${row.dose}</td>
+          <td>${row.phi}</td>
+          <td>${row.timing}</td>
+        </tr>
+      `).join("");
+    }
+
+    function generateLabel() {
+      const ingredient = getSelectedIngredient();
+      const f = getSelectedFormulation();
+
+      const tradeNameAr = document.getElementById("tradeNameAr").value;
+      const tradeNameEn = document.getElementById("tradeNameEn").value;
+      const manufacturer = document.getElementById("manufacturer").value;
+      const agent = document.getElementById("agent").value;
+      const address = document.getElementById("address").value;
+      const email = document.getElementById("email").value;
+      const batchNo = document.getElementById("batchNo").value;
+      const packSize = document.getElementById("packSize").value;
+      const prodDate = document.getElementById("prodDate").value;
+      const expDate = document.getElementById("expDate").value;
+
+      const propertiesText = document.getElementById("propertiesText").value;
+      const mixingText = document.getElementById("mixingText").value;
+      const storageText = document.getElementById("storageText").value;
+      const envText = document.getElementById("envText").value;
+      const precautionsText = document.getElementById("precautionsText").value;
+
+      const html = `
+        <div class="top-band">
+          <div>${ingredient.pesticideCategoryEn.toUpperCase()}</div>
+          <div class="group-no">${ingredient.modeOfActionGroup}</div>
+          <div>GROUP</div>
+        </div>
+
+        <div class="hero">
+          <div class="hero-box">
+            <h2>${tradeNameAr}</h2>
+            <div class="meta-line"><span>الاسم الإنجليزي:</span> ${tradeNameEn}</div>
+            <div class="meta-line"><span>المادة الفعالة:</span> ${ingredient.nameAr} / ${ingredient.nameEn}</div>
+            <div class="meta-line"><span>المجموعة الكيميائية:</span> ${ingredient.chemicalGroupAr}</div>
+            <div class="meta-line"><span>هيئة المبيد:</span> ${f.formulationNameAr} (${f.code})</div>
+            <div class="meta-line"><span>فترة إعادة الدخول للحقل المعامل:</span> ${ingredient.reiHours} ساعة</div>
+            <div class="meta-line"><span>الاستخدام المقيد:</span> ${ingredient.restrictedUse}</div>
+            <div class="meta-line"><span>التركيب:</span> ${f.compositionAr}</div>
+          </div>
+
+          <div class="hero-box">
+            <div class="meta-line"><span>إنتاج:</span> ${manufacturer}</div>
+            <div class="meta-line"><span>الوكيل الحصري:</span> ${agent}</div>
+            <div class="meta-line"><span>العنوان:</span> ${address}</div>
+            <div class="meta-line"><span>البريد الإلكتروني:</span> ${email}</div>
+            <div class="meta-line"><span>رقم الدفعة:</span> ${batchNo}</div>
+            <div class="meta-line"><span>تاريخ الإنتاج:</span> ${prodDate}</div>
+            <div class="meta-line"><span>تاريخ الانتهاء:</span> ${expDate}</div>
+            <div class="meta-line"><span>حجم العبوة:</span> ${packSize}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">خواص المبيد</div>
+          <div class="section-content">${nl2br(propertiesText)}</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">طرق ومعدلات الاستخدام</div>
+          <div class="section-content">
+            <table class="usage-table">
+              <thead>
+                <tr>
+                  <th>اسم المحصول</th>
+                  <th>الآفة / المرض / الحشيشة</th>
+                  <th>معدل الاستخدام</th>
+                  <th>فترة التحريم</th>
+                  <th>توقيت الاستخدام</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${generateUsageRows(f.usage)}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="company-grid">
+          <div class="section">
+            <div class="section-title">قابلية الخلط</div>
+            <div class="section-content">${nl2br(mixingText)}</div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">التخزين</div>
+            <div class="section-content">${nl2br(storageText)}</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">الأثر على الإنسان والبيئة والحيوان</div>
+          <div class="section-content">${nl2br(envText)}</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">الاحتياطات</div>
+          <div class="section-content">${nl2br(precautionsText)}</div>
+        </div>
+      `;
+
+      document.getElementById("labelPreview").innerHTML = html;
+    }
+
+    function resetDemo() {
+      document.getElementById("manufacturer").value = "شركة فابكو";
+      document.getElementById("agent").value = "التكامل الوطنية للزراعة";
+      document.getElementById("address").value = "الرياض، المملكة العربية السعودية";
+      document.getElementById("email").value = "info@example.com";
+      document.getElementById("batchNo").value = "B-2026-001";
+      document.getElementById("packSize").value = "1 كجم";
+      document.getElementById("prodDate").value = "2026-03-01";
+      document.getElementById("expDate").value = "2028-03-01";
+      fillTextsFromSelection();
+    }
+
+    ingredientSelect.addEventListener("change", loadFormulations);
+    formulationSelect.addEventListener("change", fillTextsFromSelection);
+
+    loadIngredients();
+    generateLabel();
+  </script>
+</body>
+</html>
