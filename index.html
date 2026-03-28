@@ -277,7 +277,7 @@
     }
 
     .product-name-wrap {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .product-name-wrap.powder {
@@ -302,21 +302,18 @@
       font-size: 25px;
       font-weight: 700;
       line-height: 1.12;
-      margin: 0 0 10px 0;
+      margin: 0 0 8px 0;
       direction: ltr;
       word-break: break-word;
     }
 
     .product-desc {
       color: #ff1d1d;
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 700;
-      text-align: right;
-      margin-bottom: 10px;
-    }
-
-    .product-desc.liquid {
       text-align: center;
+      margin-bottom: 10px;
+      line-height: 1.3;
     }
 
     table {
@@ -480,26 +477,19 @@
         </div>
       </div>
 
-      <div class="grid-2">
-        <div class="field">
-          <label for="pesticide_category">فئة المبيد</label>
-          <select id="pesticide_category">
-            <option value="insecticide" selected>مبيد حشري</option>
-            <option value="acaricide">مبيد أكاروسي</option>
-            <option value="fungicide">مبيد فطري</option>
-            <option value="herbicide">مبيد أعشاب</option>
-            <option value="nematicide">مبيد نيماتودي</option>
-            <option value="growth_regulator">منظم نمو نباتي</option>
-            <option value="molluscicide">مبيد قواقع</option>
-            <option value="adjuvant">مادة مساعدة / ناشرة</option>
-            <option value="attractant_repellent">مادة جاذبة / طاردة</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="group_text">رمز المجموعة</label>
-          <input id="group_text" type="text" value="4A" placeholder="مثال: 4A">
-        </div>
+      <div class="field">
+        <label for="pesticide_category">فئة المبيد</label>
+        <select id="pesticide_category">
+          <option value="insecticide" selected>مبيد حشري</option>
+          <option value="acaricide">مبيد أكاروسي</option>
+          <option value="fungicide">مبيد فطري</option>
+          <option value="herbicide">مبيد أعشاب</option>
+          <option value="nematicide">مبيد نيماتودي</option>
+          <option value="growth_regulator">منظم نمو نباتي</option>
+          <option value="molluscicide">مبيد قواقع</option>
+          <option value="adjuvant">مادة مساعدة / ناشرة</option>
+          <option value="attractant_repellent">مادة جاذبة / طاردة</option>
+        </select>
       </div>
 
       <div class="field">
@@ -509,7 +499,7 @@
           <div class="active-preview-ar" id="active_preview_ar">إيميداكلوبريد</div>
           <div class="active-preview-en" id="active_preview_en">Imidacloprid</div>
         </div>
-        <div class="field-note">عرض المادة المختارة هنا بشكل مرتب على سطرين</div>
+        <div class="field-note">تظهر فقط المواد الفعالة التابعة للفئة المختارة</div>
       </div>
 
       <div class="grid-2">
@@ -624,15 +614,14 @@
             </div>
 
             <div id="product_name_wrap" class="product-name-wrap powder">
-              <div class="product-name-ar" id="out_trade_name_ar">أكوكيم 25% دبليو بي</div>
-              <div class="product-name-en" id="out_trade_name_en">ACOCHEM 25% WP</div>
+              <div class="product-name-ar" id="out_trade_name_ar">أكوكيم 25%</div>
+              <div class="product-name-en" id="out_trade_name_en">ACOCHEM 25%</div>
             </div>
 
             <div class="product-desc" id="out_product_desc">
               مبيد حشري على هيئة مسحوق قابل للبلل (WP)
             </div>
 
-            <h3 class="section-title">التركيب:</h3>
             <table>
               <tr>
                 <th>التركيب:</th>
@@ -702,6 +691,18 @@
   </div>
 
   <script>
+    const CATEGORY_META = {
+      insecticide: { ar: "مبيد حشري", en: "INSECTICIDE", cats: ["المبيدات الحشرية"], defaultGroup: "4A" },
+      acaricide: { ar: "مبيد أكاروسي", en: "ACARICIDE", cats: ["المبيدات الأكاروسية"], defaultGroup: "" },
+      fungicide: { ar: "مبيد فطري", en: "FUNGICIDE", cats: ["المبيدات الفطرية"], defaultGroup: "" },
+      herbicide: { ar: "مبيد أعشاب", en: "HERBICIDE", cats: ["المبيدات العشبية"], defaultGroup: "" },
+      nematicide: { ar: "مبيد نيماتودي", en: "NEMATICIDE", cats: ["المبيدات النيماتودية"], defaultGroup: "" },
+      growth_regulator: { ar: "منظم نمو نباتي", en: "PLANT GROWTH REGULATOR", cats: ["منظمات النمو النباتية"], defaultGroup: "" },
+      molluscicide: { ar: "مبيد قواقع", en: "MOLLUSCICIDE", cats: ["مبيدات القواقع"], defaultGroup: "" },
+      adjuvant: { ar: "مادة مساعدة / ناشرة", en: "ADJUVANT", cats: ["المواد المساعدة والناشرة"], defaultGroup: "" },
+      attractant_repellent: { ar: "مادة جاذبة / طاردة", en: "ATTRACTANT / REPELLENT", cats: ["المواد الجاذبة والطاردة"], defaultGroup: "" }
+    };
+
     const FORMULATIONS = [
       { code: "CS", ar: "كبسولات معلقة", en: "Capsule suspension", def: "معلق ثابت من كبسولات في سائل تستخدم عادة بعد التخفيف بالماء.", type: "liquid" },
       { code: "DC", ar: "مركز قابل للانتشار", en: "Dispersible concentrate", def: "سائل متجانس لمادة صلبة قابلة للانتشار عند التخفيف.", type: "liquid" },
@@ -724,18 +725,6 @@
       { code: "WS", ar: "مسحوق قابل للانتشار في الماء لمعاملة البذور", en: "Water dispersible powder for slurry seed treatment", def: "مسحوق ينتشر بتركيزات عالية في الماء قبل استخدامه على البذور في شكل عجينة.", type: "powder" },
       { code: "ZC", ar: "مستحضر مخلوط من كبسولات معلقة ومعلقات مركزة", en: "A mixed formulation of CS and SC", def: "معلق ثابت من كبسولات معلقة ومعلقات مركزة تستخدم بعد التخفيف بالماء.", type: "liquid" }
     ];
-
-    const CATEGORY_META = {
-      insecticide: { ar: "مبيد حشري", en: "INSECTICIDE" },
-      acaricide: { ar: "مبيد أكاروسي", en: "ACARICIDE" },
-      fungicide: { ar: "مبيد فطري", en: "FUNGICIDE" },
-      herbicide: { ar: "مبيد أعشاب", en: "HERBICIDE" },
-      nematicide: { ar: "مبيد نيماتودي", en: "NEMATICIDE" },
-      growth_regulator: { ar: "منظم نمو نباتي", en: "PLANT GROWTH REGULATOR" },
-      molluscicide: { ar: "مبيد قواقع", en: "MOLLUSCICIDE" },
-      adjuvant: { ar: "مادة مساعدة / ناشرة", en: "ADJUVANT" },
-      attractant_repellent: { ar: "مادة جاذبة / طاردة", en: "ATTRACTANT / REPELLENT" }
-    };
 
     const ACTIVE_INGREDIENTS = [
       { cat: "المبيدات الحشرية", en: "Acetamiprid", ar: "أسيتامبريد" },
@@ -968,31 +957,23 @@
       const code = document.getElementById("formulation").value;
       const f = FORMULATIONS.find(x => x.code === code);
       const note = document.getElementById("formulation_note");
-      if (!f) {
-        note.textContent = "";
-        return;
-      }
-      note.textContent = `${f.ar} | ${f.en} | ${f.def}`;
+      note.textContent = f ? `${f.ar} | ${f.en} | ${f.def}` : "";
     }
 
-    function initActiveIngredients() {
-      const select = document.getElementById("active_select");
-      const groups = {};
+    function getSelectedCategoryMeta() {
+      const key = document.getElementById("pesticide_category").value;
+      return CATEGORY_META[key] || CATEGORY_META.insecticide;
+    }
 
-      ACTIVE_INGREDIENTS.forEach(item => {
-        if (!groups[item.cat]) groups[item.cat] = [];
-        groups[item.cat].push(item);
-      });
+    function initOrRefreshActiveIngredients() {
+      const select = document.getElementById("active_select");
+      const meta = getSelectedCategoryMeta();
+      const filtered = ACTIVE_INGREDIENTS.filter(item => meta.cats.includes(item.cat));
 
       let html = "";
-      Object.keys(groups).forEach(cat => {
-        html += `<optgroup label="${cat}">`;
-        groups[cat].forEach(item => {
-          const value = encodeURIComponent(JSON.stringify(item));
-          const selected = item.en === "Imidacloprid" ? "selected" : "";
-          html += `<option value="${value}" ${selected}>${item.en} — ${item.ar}</option>`;
-        });
-        html += `</optgroup>`;
+      filtered.forEach((item, idx) => {
+        const value = encodeURIComponent(JSON.stringify(item));
+        html += `<option value="${value}" ${idx === 0 ? "selected" : ""}>${item.en} — ${item.ar}</option>`;
       });
 
       select.innerHTML = html;
@@ -1019,10 +1000,7 @@
 
       const allBullets = lines.every(line => line.trim().startsWith("•"));
       if (allBullets) {
-        const items = lines.map(line => {
-          const cleaned = line.replace(/^•\s*/, "").trim();
-          return `<li>${cleaned}</li>`;
-        }).join("");
+        const items = lines.map(line => `<li>${line.replace(/^•\s*/, "").trim()}</li>`).join("");
         return `<ul class="section-list">${items}</ul>`;
       }
 
@@ -1043,13 +1021,7 @@
     }
 
     function getSelectedFormulation() {
-      const code = document.getElementById("formulation").value;
-      return FORMULATIONS.find(f => f.code === code);
-    }
-
-    function getArabicFormulationLabel(code) {
-      const f = FORMULATIONS.find(x => x.code === code);
-      return f ? f.ar : code;
+      return FORMULATIONS.find(f => f.code === document.getElementById("formulation").value);
     }
 
     function isPowderType(code) {
@@ -1064,9 +1036,70 @@
       if (mode !== "registered") input.value = "";
     }
 
+    function getAutoGroup(categoryKey, activeEn) {
+      const insecticideGroups = {
+        "Imidacloprid": "4A",
+        "Acetamiprid": "4A",
+        "Thiamethoxam": "4A",
+        "Dinotefuran": "4A",
+        "Sulfoxaflor": "4C",
+        "Flupyradifurone": "4D",
+        "Spinosad": "5",
+        "Spinetoram": "5",
+        "Emamectin Benzoate": "6",
+        "Abamectin": "6",
+        "Chlorantraniliprole": "28",
+        "Cyantraniliprole": "28",
+        "Buprofezin": "16",
+        "Lufenuron": "15",
+        "Diflubenzuron": "15",
+        "Pyriproxyfen": "7C",
+        "Methoxyfenozide": "18",
+        "Tebufenozide": "18",
+        "Fipronil": "2B",
+        "Indoxacarb": "22A",
+        "Cyromazine": "17",
+        "Pirimiphos methyl": "1B",
+        "Fenitrothion": "1B",
+        "Cypermethrin": "3A",
+        "Deltamethrin": "3A",
+        "Alfa-Cypermethrin": "3A",
+        "Lambda cyhlothrin": "3A",
+        "Lambda-Cyhalothrin + Emamectin Benzoate": "3A + 6",
+        "Thiamethoxam + Lambda-Cyhalothrin": "4A + 3A",
+        "Imidacloprid + Bifenthrin": "4A + 3A",
+        "Imidacloprid + Abamectin": "4A + 6",
+        "Bifenthrin + Abamectin": "3A + 6",
+        "Thiamethoxam + Abamectin": "4A + 6",
+        "Methoxyfenozide + Spinetoram": "18 + 5",
+        "Cyantraniliprole + Abamectin": "28 + 6",
+        "Indoxacarb + Emamectin Benzoate": "22A + 6",
+        "Lufenuron + Emamectin Benzoate": "15 + 6",
+        "Pyriproxyfen + Emamectin Benzoate": "7C + 6",
+        "Thiamethoxam + Chlorantraniliprole": "4A + 28",
+        "Chlorantraniliprole + Abamectin": "28 + 6",
+        "Chlorantraniliprole + LambdaCyhalothrin": "28 + 3A",
+        "Indoxacarb + Acetamiprid": "22A + 4A",
+        "Acetamiprid + Bistrifluron": "4A + 15",
+        "Buprofezin + Deltamethrin": "16 + 3A"
+      };
+
+      if (categoryKey === "insecticide") return insecticideGroups[activeEn] || "—";
+      if (categoryKey === "acaricide") return "—";
+      if (categoryKey === "fungicide") return "—";
+      if (categoryKey === "herbicide") return "—";
+      if (categoryKey === "nematicide") return "—";
+      if (categoryKey === "growth_regulator") return "—";
+      if (categoryKey === "molluscicide") return "—";
+      if (categoryKey === "adjuvant") return "—";
+      if (categoryKey === "attractant_repellent") return "—";
+      return "—";
+    }
+
     function buildProductDescription(categoryKey, formulationCode) {
       const cat = CATEGORY_META[categoryKey] || CATEGORY_META.insecticide;
-      const formulationAr = getArabicFormulationLabel(formulationCode);
+      const formulationInfo = getSelectedFormulation();
+      const formulationAr = formulationInfo ? formulationInfo.ar : formulationCode;
       return `${cat.ar} على هيئة ${formulationAr} (${formulationCode})`;
     }
 
@@ -1080,14 +1113,11 @@
       const registrationNumber = getValue("registration_number");
       const manufacturer = getValue("manufacturer");
       const agent = getValue("agent");
-      const groupText = getValue("group_text");
       const categoryKey = getValue("pesticide_category");
-      const formulationInfo = getSelectedFormulation();
       const categoryMeta = CATEGORY_META[categoryKey] || CATEGORY_META.insecticide;
 
-      const formLabelAr = getArabicFormulationLabel(formulation);
-      const finalNameAr = `${tradeNameAr} ${concentration} ${formLabelAr}`.trim();
-      const finalNameEn = `${tradeNameEn} ${concentration} ${formulation}`.trim();
+      const finalNameAr = `${tradeNameAr} ${concentration}`.trim();
+      const finalNameEn = `${tradeNameEn} ${concentration}`.trim();
       const productDesc = buildProductDescription(categoryKey, formulation);
 
       let regValue = "( - - - )";
@@ -1103,12 +1133,10 @@
 
       const powder = isPowderType(formulation);
       const productWrap = document.getElementById("product_name_wrap");
-      const productDescEl = document.getElementById("out_product_desc");
 
       productWrap.className = `product-name-wrap ${powder ? "powder" : "liquid"}`;
-      productDescEl.className = `product-desc ${powder ? "" : "liquid"}`.trim();
 
-      document.getElementById("out_group_value").textContent = groupText.replace("GROUP", "").trim();
+      document.getElementById("out_group_value").textContent = getAutoGroup(categoryKey, active.en);
       document.getElementById("out_pesticide_type_text").textContent = categoryMeta.en;
 
       document.getElementById("out_trade_name_ar").textContent = finalNameAr;
@@ -1122,9 +1150,10 @@
       document.getElementById("out_additives_ar").textContent = additives;
       document.getElementById("out_additives_ratio").textContent = additives;
 
+      const formulationInfo = getSelectedFormulation();
       const dynamicProperties = formulationInfo
         ? `${categoryMeta.ar} ${formulationInfo.def}`
-        : `${categoryMeta.ar} على هيئة ${formLabelAr} (${formulation})`;
+        : `${categoryMeta.ar} على هيئة (${formulation})`;
 
       document.getElementById("out_properties_text").textContent = dynamicProperties;
       document.getElementById("out_mixing_text").textContent = STATIC_CONTENT.mixing;
@@ -1184,6 +1213,7 @@
     });
 
     document.getElementById("pesticide_category").addEventListener("change", function () {
+      initOrRefreshActiveIngredients();
       generateLabel();
     });
 
@@ -1193,7 +1223,7 @@
     });
 
     initFormulations();
-    initActiveIngredients();
+    initOrRefreshActiveIngredients();
     updateRegistrationState();
     generateLabel();
   </script>
