@@ -334,11 +334,46 @@
 
     .composition-table {
       font-size: 10px;
+      direction: ltr;
+      table-layout: fixed;
+      margin-bottom: 12px;
     }
+
+    .composition-table col.col-en { width: 37%; }
+    .composition-table col.col-ratio-en { width: 20%; }
+    .composition-table col.col-ratio-ar { width: 20%; }
+    .composition-table col.col-ar { width: 23%; }
 
     .composition-table th,
     .composition-table td {
-      padding: 3px 4px;
+      padding: 4px 6px;
+      font-weight: 700;
+      border: 1px dashed #555;
+    }
+
+    .composition-table th {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .composition-table td:nth-child(1),
+    .composition-table th:nth-child(1) {
+      text-align: left;
+      direction: ltr;
+    }
+
+    .composition-table td:nth-child(2),
+    .composition-table th:nth-child(2),
+    .composition-table td:nth-child(3),
+    .composition-table th:nth-child(3) {
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .composition-table td:nth-child(4),
+    .composition-table th:nth-child(4) {
+      text-align: right;
+      direction: rtl;
     }
 
     .usage-table th,
@@ -347,23 +382,23 @@
     }
 
     .warning-icons {
-      min-height: 54px;
+      min-height: 38px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 14px;
-      margin: 8px 0 8px 0;
+      gap: 10px;
+      margin: 6px 0 8px 0;
     }
 
     .warning-icon {
-      width: 54px;
-      height: 54px;
-      border: 3px solid #e74c3c;
+      width: 34px;
+      height: 34px;
+      border: 2px solid #e74c3c;
       transform: rotate(45deg);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 16px;
       background: #fff;
       color: #000;
       flex: 0 0 auto;
@@ -429,6 +464,14 @@
     .footer-company .label {
       color: #4a8f2f;
       font-weight: 700;
+    }
+
+    .agent-contact-line {
+      margin-top: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.5;
+      word-break: break-word;
     }
 
     .agent-logo-inline {
@@ -654,6 +697,18 @@
         </div>
       </div>
 
+      <div class="grid-2">
+        <div class="field">
+          <label for="agent_phone">رقم تلفون الوكيل الحصري</label>
+          <input id="agent_phone" type="text" value="0114625322" placeholder="مثال: 0114625322">
+        </div>
+
+        <div class="field">
+          <label for="agent_address">عنوان الوكيل الحصري</label>
+          <input id="agent_address" type="text" value="الرياض" placeholder="مثال: الرياض">
+        </div>
+      </div>
+
       <div class="field">
         <label>شعار الوكيل الحصري</label>
         <div class="upload-row">
@@ -747,6 +802,12 @@
             </div>
 
             <table class="composition-table">
+              <colgroup>
+                <col class="col-en">
+                <col class="col-ratio-en">
+                <col class="col-ratio-ar">
+                <col class="col-ar">
+              </colgroup>
               <tr>
                 <th>Composition</th>
                 <th>Ratio</th>
@@ -756,7 +817,7 @@
               <tr>
                 <td id="out_active_en">Imidacloprid</td>
                 <td id="out_concentration_ratio">25% (w/w)</td>
-                <td id="out_concentration_ar">25%</td>
+                <td id="out_concentration_ar">25% و/و</td>
                 <td id="out_active_ar">إيميداكلوبريد</td>
               </tr>
               <tr id="second_active_row" class="hidden">
@@ -774,13 +835,13 @@
               <tr>
                 <td>Additives</td>
                 <td id="out_additives_ratio">75% (w/w)</td>
-                <td id="out_additives_ar">75%</td>
+                <td id="out_additives_ar">75% و/و</td>
                 <td>مواد مضافة</td>
               </tr>
               <tr>
                 <td>Total</td>
                 <td id="out_total_ratio">100% (w/w)</td>
-                <td>100%</td>
+                <td id="out_total_ar">100% و/و</td>
                 <td>المجموع</td>
               </tr>
             </table>
@@ -821,6 +882,7 @@
             <div class="footer-company">
               <div><span class="label">إنتاج:</span> <span id="out_manufacturer">فابكو</span></div>
               <div><span class="label">الوكيل والموزعون:</span> <span id="out_agent">التكامل الوطنية</span></div>
+              <div class="agent-contact-line"><span id="out_agent_address">الرياض</span> : <span class="label">العنوان</span> &nbsp;&nbsp; <span id="out_agent_phone">0114625322</span> : <span class="label">تلفون</span></div>
               <div class="agent-logo-inline" id="agent_logo_inline">
                 <span class="agent-logo-placeholder">شعار الوكيل الحصري</span>
               </div>
@@ -1267,6 +1329,8 @@
       const registrationNumber = getValue("registration_number");
       const manufacturer = getValue("manufacturer");
       const agent = getValue("agent");
+      const agentPhone = getValue("agent_phone");
+      const agentAddress = getValue("agent_address");
       const categoryKey = getValue("pesticide_category");
       const categoryMeta = CATEGORY_META[categoryKey] || CATEGORY_META.insecticide;
 
@@ -1295,7 +1359,7 @@
       document.getElementById("out_product_desc").textContent = productDesc;
 
       document.getElementById("out_active_ar").textContent = active1.ar || active1.en;
-      document.getElementById("out_concentration_ar").textContent = formatPercentNumber(p1);
+      document.getElementById("out_concentration_ar").textContent = `${formatPercentNumber(p1)} و/و`;
       document.getElementById("out_concentration_ratio").textContent = `${formatPercentNumber(p1)} (${ratioUnit})`;
       document.getElementById("out_active_en").textContent = active1.en || "";
 
@@ -1303,7 +1367,7 @@
       if (hasSecond) {
         secondRow.classList.remove("hidden");
         document.getElementById("out_active_ar_2").textContent = active2.ar || active2.en;
-        document.getElementById("out_concentration_ar_2").textContent = formatPercentNumber(p2);
+        document.getElementById("out_concentration_ar_2").textContent = `${formatPercentNumber(p2)} و/و`;
         document.getElementById("out_concentration_ratio_2").textContent = `${formatPercentNumber(p2)} (${ratioUnit})`;
         document.getElementById("out_active_en_2").textContent = active2.en || "";
       } else {
@@ -1314,16 +1378,17 @@
       if (hasThird) {
         thirdRow.classList.remove("hidden");
         document.getElementById("out_active_ar_3").textContent = active3.ar || active3.en;
-        document.getElementById("out_concentration_ar_3").textContent = formatPercentNumber(p3);
+        document.getElementById("out_concentration_ar_3").textContent = `${formatPercentNumber(p3)} و/و`;
         document.getElementById("out_concentration_ratio_3").textContent = `${formatPercentNumber(p3)} (${ratioUnit})`;
         document.getElementById("out_active_en_3").textContent = active3.en || "";
       } else {
         thirdRow.classList.add("hidden");
       }
 
-      document.getElementById("out_additives_ar").textContent = additivesText;
+      document.getElementById("out_additives_ar").textContent = `${additivesText} و/و`;
       document.getElementById("out_additives_ratio").textContent = `${additivesText} (${ratioUnit})`;
       document.getElementById("out_total_ratio").textContent = `100% (${ratioUnit})`;
+      document.getElementById("out_total_ar").textContent = `100% و/و`;
 
       document.getElementById("out_properties_text").textContent = `${categoryMeta.ar} على هيئة ${formulationAr} (${formulationCode})`;
       document.getElementById("out_mixing_text").textContent = STATIC_CONTENT.mixing;
@@ -1342,6 +1407,8 @@
       document.getElementById("out_registration_value").textContent = regValue;
       document.getElementById("out_manufacturer").textContent = manufacturer;
       document.getElementById("out_agent").textContent = agent;
+      document.getElementById("out_agent_phone").textContent = agentPhone || "-";
+      document.getElementById("out_agent_address").textContent = agentAddress || "-";
 
       const agentLogoBox = document.getElementById("agent_logo_inline");
       if (logoDataUrl) {
@@ -1422,6 +1489,10 @@
     document.getElementById("active3_percent").addEventListener("input", function () {
       calculateTotalPercent();
       generateLabel();
+    });
+
+    ["trade_name_ar","trade_name_en","registration_number","manufacturer","agent","agent_phone","agent_address"].forEach(id => {
+      document.getElementById(id).addEventListener("input", generateLabel);
     });
 
     function init() {
