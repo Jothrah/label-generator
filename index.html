@@ -1,272 +1,703 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>ملصق مبيد</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مولد ملصق مبيد</title>
 
-<style>
-@page {
-    size: A4 landscape;
-    margin: 10mm;
-}
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
 
-body {
-    margin: 0;
-    font-family: Tahoma;
-    background: #e5e5e5;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.page {
-    width: 297mm;
-    height: 210mm;
-    background: white;
-    margin: auto;
-    padding: 10px;
-    box-sizing: border-box;
-}
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #e7e7e7;
+      color: #111;
+    }
 
-.container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: 100%;
-}
+    .app-wrap {
+      width: 100%;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-/* الأعمدة */
-.col {
-    padding: 10px;
-    border-left: 2px dashed black;
-    font-size: 13px;
-}
+    .form-card {
+      max-width: 760px;
+      margin: 0 auto 24px auto;
+      background: #f3f3f3;
+      border: 1px solid #d0d0d0;
+      border-radius: 18px;
+      padding: 28px 26px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
 
-.col:first-child {
-    border-left: none;
-}
+    .form-title {
+      margin: 0 0 18px 0;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 700;
+    }
 
-/* العناوين */
-h3 {
-    color: green;
-    margin: 6px 0;
-}
+    .field {
+      margin-bottom: 16px;
+    }
 
-/* الشريط العلوي */
-.header {
-    display: flex;
-    border: 2px solid black;
-    margin-bottom: 10px;
-}
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 2px solid #cfcfcf;
+      border-radius: 14px;
+      background: #dcdcdc;
+      padding: 14px 18px;
+      font-size: 22px;
+      font-family: inherit;
+      outline: none;
+    }
 
-.header div {
-    flex: 1;
-    text-align: center;
-    font-weight: bold;
-    padding: 5px;
-}
+    .field textarea {
+      min-height: 110px;
+      resize: vertical;
+      font-size: 18px;
+      line-height: 1.6;
+    }
 
-.group {
-    background: black;
-    color: white;
-}
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #999;
+      background: #e5e5e5;
+    }
 
-/* اسم المبيد */
-.name-ar {
-    color: green;
-    font-size: 28px;
-    font-weight: bold;
-    text-align: right;
-}
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-.name-en {
-    color: green;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: right;
-}
+    .btn {
+      border: none;
+      border-radius: 14px;
+      padding: 16px 26px;
+      font-size: 22px;
+      font-family: inherit;
+      cursor: pointer;
+      min-width: 220px;
+    }
 
-.desc {
-    color: red;
-    font-weight: bold;
-    text-align: right;
-}
+    .btn-generate {
+      background: #ff4f87;
+      color: #000;
+      font-weight: 700;
+    }
 
-/* الجداول */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-}
+    .btn-print {
+      background: #111;
+      color: #fff;
+      font-weight: 700;
+    }
 
-table td, table th {
-    border: 1px solid black;
-    padding: 5px;
-}
+    .preview-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-/* تحذير */
-.warning {
-    text-align: center;
-    color: red;
-    font-weight: bold;
-}
+    .sheet {
+      width: 297mm;
+      height: 210mm;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      padding: 6mm 5mm;
+      overflow: hidden;
+      position: relative;
+    }
 
-/* الشريط الأصفر */
-.yellow {
-    background: yellow;
-    height: 40px;
-    margin-top: 10px;
-}
+    .columns {
+      direction: ltr;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 10px;
+      height: 100%;
+    }
 
-/* نقاط */
-ul {
-    margin: 0;
-    padding-right: 15px;
-}
-</style>
+    .col {
+      direction: rtl;
+      position: relative;
+      padding: 4px 12px 48px 12px;
+      height: 100%;
+      font-size: 12px;
+      line-height: 1.42;
+      color: #111;
+    }
 
+    .col-left,
+    .col-middle {
+      border-right: 2px dashed #000;
+    }
+
+    .section-title {
+      margin: 0 0 6px 0;
+      color: #4a8f2f;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .section-text {
+      margin: 0 0 10px 0;
+    }
+
+    .section-list {
+      margin: 0 0 10px 0;
+      padding-right: 18px;
+    }
+
+    .section-list li {
+      margin-bottom: 4px;
+    }
+
+    .top-strip {
+      direction: ltr;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1.8px solid #000;
+      margin: 4px 0 14px 0;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .top-strip div {
+      padding: 5px 8px;
+    }
+
+    .group-box {
+      background: #000;
+      color: #fff;
+    }
+
+    .product-name-ar {
+      color: #5f8f43;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.12;
+      text-align: right;
+      margin: 0 0 4px 0;
+    }
+
+    .product-name-en {
+      color: #5f8f43;
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1.12;
+      text-align: right;
+      margin: 0 0 10px 0;
+      direction: ltr;
+    }
+
+    .product-desc {
+      color: #ff1d1d;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    th, td {
+      border: 1px solid #000;
+      padding: 4px 6px;
+      vertical-align: middle;
+    }
+
+    th {
+      font-weight: 700;
+    }
+
+    .usage-table th,
+    .usage-table td {
+      text-align: center;
+    }
+
+    .text-right {
+      text-align: right !important;
+    }
+
+    .warning-text {
+      color: #ff1d1d;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.35;
+      margin: 8px 0 10px 0;
+    }
+
+    .reg-number {
+      color: #4a8f2f;
+      font-weight: 700;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    .reg-value {
+      text-align: center;
+      color: #4a8f2f;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 3px 0 10px 0;
+      direction: ltr;
+    }
+
+    .footer-company {
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .footer-company .label {
+      color: #4a8f2f;
+      font-weight: 700;
+    }
+
+    .logo-box {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #444;
+      border: 1px dashed #bbb;
+      padding: 14px 8px;
+    }
+
+    .yellow-bar {
+      position: absolute;
+      right: 12px;
+      left: 12px;
+      bottom: 6px;
+      height: 34px;
+      background: #fff200;
+    }
+
+    .hidden-print {
+      display: block;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .hidden-print {
+        display: none !important;
+      }
+
+      .app-wrap {
+        padding: 0;
+      }
+
+      .preview-wrap {
+        max-width: none;
+        margin: 0;
+      }
+
+      .sheet {
+        width: 297mm;
+        height: 210mm;
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="app-wrap">
 
-<div class="page">
+    <div class="form-card hidden-print">
+      <h1 class="form-title">إنشاء الملصق</h1>
 
-<div class="container">
+      <div class="field">
+        <input id="trade_name_ar" type="text" value="أكوكيم" placeholder="اسم المبيد بالعربي">
+      </div>
 
-<!-- العمود الأيسر -->
-<div class="col">
+      <div class="field">
+        <input id="trade_name_en" type="text" value="ACOCHEM" placeholder="اسم المبيد بالإنجليزي">
+      </div>
 
-<h3>قابلية الخلط:</h3>
-<p>يمكن خلطه مع عدد من المبيدات الحشرية ويجب الرش مباشرة بعد الخلط...</p>
+      <div class="field">
+        <input id="concentration" type="text" value="25%" placeholder="النسبة">
+      </div>
 
-<h3>التخزين:</h3>
-<p>يحفظ في عبواته الأصلية محكمة الإغلاق في مكان جاف جيد التهوية...</p>
+      <div class="field">
+        <input id="formulation" type="text" value="WP" placeholder="الهيئة">
+      </div>
 
-<h3>الأثر على الإنسان والبيئة والحيوان:</h3>
-<p>سام للإنسان والحيوان، سام للأسماك والأحياء المائية...</p>
+      <div class="field">
+        <input id="active_ar" type="text" value="إيميداكلوبريد" placeholder="المادة الفعالة بالعربي">
+      </div>
 
-<h3>أعراض التسمم:</h3>
-<p>قيء، اضطراب أعصاب، رعشة عضلية...</p>
+      <div class="field">
+        <select id="registration_mode">
+          <option value="trial" selected>بدون رقم تسجيل للتجربة</option>
+          <option value="registered">يوجد رقم تسجيل</option>
+        </select>
+      </div>
 
-<h3>مضاد التسمم:</h3>
-<p>لا يوجد ترياق ويتم العلاج حسب الأعراض.</p>
+      <div class="field">
+        <input id="registration_number" type="text" value="" placeholder="رقم التسجيل بالمملكة">
+      </div>
 
-<h3>احتياطات:</h3>
-<ul>
-<li>ارتداء معدات الوقاية</li>
-<li>عدم الأكل أو الشرب</li>
-</ul>
+      <div class="field">
+        <input id="manufacturer" type="text" value="فابكو" placeholder="الشركة المنتجة">
+      </div>
 
-<h3>التخلص من العبوات:</h3>
-<p>غسل العبوة ثلاث مرات والتخلص منها.</p>
+      <div class="field">
+        <input id="agent" type="text" value="التكامل الوطنية" placeholder="الوكيل">
+      </div>
 
-<h3>الضمان:</h3>
-<p>تضمن الشركة المنتج في عبواته الأصلية.</p>
+      <div class="field">
+        <textarea id="properties_text" placeholder="الخواص">مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP) يؤثر على الحشرات بالملامسة وعن طريق المعدة، يستخدم لمكافحة العديد من الآفات الحشرية التي تصيب الخضروات ونباتات الزينة في البيوت المحمية.</textarea>
+      </div>
 
-<div class="yellow"></div>
+      <div class="field">
+        <textarea id="mixing_text" placeholder="قابلية الخلط">يمكن خلطه مع عدد من المبيدات الحشرية ويجب الرش مباشرة بعد الخلط ويفضل عمل تجربة مصغرة قبل الخلط بكميات كبيرة.</textarea>
+      </div>
 
-</div>
+      <div class="field">
+        <textarea id="storage_text" placeholder="التخزين">يحفظ في عبواته الأصلية محكمة الإغلاق في مكان جاف جيد التهوية بعيداً عن مصادر الحرارة وأشعة الشمس المباشرة وبعيداً عن متناول الأطفال.</textarea>
+      </div>
 
-<!-- العمود الأوسط -->
-<div class="col">
+      <div class="field">
+        <textarea id="effect_text" placeholder="الأثر على الإنسان والبيئة والحيوان">سام للإنسان والحيوان إذا ابتلع أو استنشق أو لامس العين أو الجلد، سام للأسماك والأحياء المائية كما أن المبيد شديد السمية على نحل العسل.</textarea>
+      </div>
 
-<h3>الخواص:</h3>
-<p>مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP)</p>
+      <div class="field">
+        <textarea id="symptoms_text" placeholder="أعراض التسمم">قد يحدث قيء تلقائي، اضطراب أعصاب، سيل اللعاب، ارتجاف أو رعشة في العضلات، تشنج.</textarea>
+      </div>
 
-<h3>معدل الاستخدام:</h3>
+      <div class="field">
+        <textarea id="antidote_text" placeholder="مضاد التسمم">لا توجد جرعة مضادة ويتم العلاج حسب الأعراض الظاهرة.</textarea>
+      </div>
 
-<table>
-<tr>
-<th>المحصول</th>
-<th>الآفة</th>
-<th>المعدل</th>
-<th>فترة التحريم</th>
-</tr>
+      <div class="field">
+        <textarea id="precautions_text" placeholder="الاحتياطات">• اتبع التعليمات المدونة على بطاقة المعلومات بدقة.
+• لبس الملابس الواقية عند خلط المبيد أو استخدامه.
+• تجنب استنشاق أبخرة أو غبار المبيد.
+• لا تأكل أو تشرب أو تدخن أثناء الاستخدام.</textarea>
+      </div>
 
-<tr>
-<td>الخضروات</td>
-<td>المن</td>
-<td>40 جم / 100 لتر</td>
-<td>7 أيام</td>
-</tr>
+      <div class="field">
+        <textarea id="disposal_text" placeholder="التخلص من العبوات">يمنع منعاً باتاً إعادة استخدام عبوات المبيد الفارغة لأي غرض كان ويجب غسل العبوة ثلاث مرات وإفراغها في خزان الرش والتخلص منها في الحاويات المخصصة لذلك.</textarea>
+      </div>
 
-</table>
+      <div class="field">
+        <textarea id="warranty_text" placeholder="الضمان">تضمن الشركة المنتج في عبواته الأصلية وذلك تحت ظروف التخزين المناسبة ولا تتحمل أي أضرار ناتجة عن سوء التخزين أو الاستخدام.</textarea>
+      </div>
 
-<h3>ملاحظة:</h3>
-<p>بعض النباتات حساسة للمبيد.</p>
+      <div class="field">
+        <textarea id="first_aid_text" placeholder="الإسعافات الأولية">• في حالة ملامسته العينين: تغسل فوراً بالماء النظيف لمدة 15 دقيقة على الأقل.
+• في حالة ملامسته للجلد: تنزع الملابس الملوثة وتغسل أجزاء الجسم جيداً بالماء والصابون.
+• في حالة الاستنشاق: ينقل المصاب إلى منطقة جيدة التهوية بعيداً عن مكان التلوث ويستدعى الطبيب.
+• في حالة ابتلاع المبيد: يعطى المصاب 1 – 2 كأس من الماء.
+• في حالة التعرض للمبيد الاتصال على الرقم الموحد لوزارة الصحة 937.</textarea>
+      </div>
 
-<h3>فترة إعادة الدخول:</h3>
-<p>12 ساعة</p>
+      <div class="field">
+        <textarea id="note_text" placeholder="ملاحظة">• بعض نباتات الزينة حساسة للمبيد لذا يجب إجراء تجربة مصغرة لفحص الحساسية.
+• نظراً لسرعة صفة المقاومة للذباب الأبيض فإنه يفضل وضعه ضمن برنامج المكافحة المتكاملة بالتبادل مع المبيدات الأخرى.</textarea>
+      </div>
 
-<div class="yellow"></div>
+      <div class="field">
+        <input id="rei_text" type="text" value="12 ساعة" placeholder="فترة إعادة الدخول">
+      </div>
 
-</div>
+      <div class="field">
+        <input id="group_text" type="text" value="GROUP 4A" placeholder="المجموعة">
+      </div>
 
-<!-- العمود الأيمن -->
-<div class="col">
+      <div class="field">
+        <input id="pesticide_type_text" type="text" value="INSECTICIDE" placeholder="نوع المبيد بالإنجليزي">
+      </div>
 
-<div class="header">
-<div>INSECTICIDE</div>
-<div class="group">GROUP 4A</div>
-</div>
+      <div class="btn-row">
+        <button class="btn btn-generate" onclick="generateLabel()">إنشاء الملصق</button>
+        <button class="btn btn-print" onclick="window.print()">طباعة / حفظ PDF</button>
+      </div>
+    </div>
 
-<div class="name-ar">اسم المبيد 25% دبليو بي</div>
-<div class="name-en">ACOCHEM 25% WP</div>
+    <div class="preview-wrap">
+      <div class="sheet" id="labelSheet">
+        <div class="columns">
 
-<p class="desc">
-مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP)
-</p>
+          <!-- العمود الأيسر -->
+          <div class="col col-left">
+            <h3 class="section-title">قابلية الخلط:</h3>
+            <p class="section-text" id="out_mixing_text"></p>
 
-<h3>التركيب:</h3>
+            <h3 class="section-title">التخزين:</h3>
+            <p class="section-text" id="out_storage_text"></p>
 
-<table>
-<tr>
-<th>Composition</th>
-<th>Ratio</th>
-<th>النسبة</th>
-</tr>
+            <h3 class="section-title">الأثر على الإنسان والبيئة والحيوان:</h3>
+            <p class="section-text" id="out_effect_text"></p>
 
-<tr>
-<td>IMIDACLOPRID</td>
-<td>25%</td>
-<td>25%</td>
-</tr>
+            <h3 class="section-title">أعراض التسمم:</h3>
+            <p class="section-text" id="out_symptoms_text"></p>
 
-<tr>
-<td>Additives</td>
-<td>75%</td>
-<td>75%</td>
-</tr>
+            <h3 class="section-title">مضاد التسمم:</h3>
+            <p class="section-text" id="out_antidote_text"></p>
 
-</table>
+            <h3 class="section-title">احتياطات:</h3>
+            <div id="out_precautions_text"></div>
 
-<div class="warning">
-مبيد مقيد تحت إشراف فني مختص<br>
-يحفظ بعيداً عن متناول الأطفال
-</div>
+            <h3 class="section-title">التخلص من العبوات:</h3>
+            <p class="section-text" id="out_disposal_text"></p>
 
-<h3>الإسعافات الأولية:</h3>
-<p>غسل العين 15 دقيقة...</p>
+            <h3 class="section-title">الضمان:</h3>
+            <p class="section-text" id="out_warranty_text"></p>
 
-<h3>رقم التسجيل:</h3>
-<p>( - - - )</p>
+            <div class="yellow-bar"></div>
+          </div>
 
-<table>
-<tr>
-<th>تاريخ الإنتاج</th>
-<th>تاريخ الانتهاء</th>
-<th>رقم الدفعة</th>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</table>
+          <!-- العمود الأوسط -->
+          <div class="col col-middle">
+            <h3 class="section-title">الخواص:</h3>
+            <p class="section-text" id="out_properties_text"></p>
 
-<div class="yellow"></div>
+            <h3 class="section-title">معدل الاستخدام:</h3>
+            <table class="usage-table">
+              <tr>
+                <th>المحصول</th>
+                <th>الآفة</th>
+                <th>المعدل</th>
+                <th>فترة التحريم</th>
+              </tr>
+              <tr>
+                <td class="text-right">الخضروات</td>
+                <td>المن</td>
+                <td>40 جم / 100 لتر</td>
+                <td>7 أيام</td>
+              </tr>
+            </table>
 
-</div>
+            <h3 class="section-title">ملاحظة:</h3>
+            <div id="out_note_text"></div>
 
-</div>
+            <h3 class="section-title">فترة إعادة الدخول للحقل المعامل:</h3>
+            <p class="section-text" id="out_rei_text"></p>
 
-</div>
+            <div class="yellow-bar"></div>
+          </div>
 
+          <!-- العمود الأيمن -->
+          <div class="col col-right">
+            <div class="top-strip">
+              <div class="group-box" id="out_group_text">GROUP 4A</div>
+              <div id="out_pesticide_type_text">INSECTICIDE</div>
+            </div>
+
+            <div class="product-name-ar" id="out_trade_name_ar">أكوكيم 25% دبليو بي</div>
+            <div class="product-name-en" id="out_trade_name_en">ACOCHEM 25% WP</div>
+
+            <div class="product-desc" id="out_product_desc">
+              مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP)
+            </div>
+
+            <h3 class="section-title">التركيب:</h3>
+            <table>
+              <tr>
+                <th>التركيب:</th>
+                <th>النسبة</th>
+                <th>Ratio</th>
+                <th>Composition</th>
+              </tr>
+              <tr>
+                <td id="out_active_ar">إيميداكلوبريد</td>
+                <td id="out_concentration_ar">25%</td>
+                <td id="out_concentration_ratio">25%</td>
+                <td id="out_active_en">IMIDACLOPRID</td>
+              </tr>
+              <tr>
+                <td>مواد مضافة</td>
+                <td id="out_additives_ar">75%</td>
+                <td id="out_additives_ratio">75%</td>
+                <td>Additives</td>
+              </tr>
+              <tr>
+                <td>المجموع</td>
+                <td>100%</td>
+                <td>100%</td>
+                <td>Total</td>
+              </tr>
+            </table>
+
+            <div class="warning-text">
+              مبيد مقيد تحت إشراف فني مختص<br>
+              يحفظ بعيداً عن متناول الأطفال
+            </div>
+
+            <h3 class="section-title">الإسعافات الأولية:</h3>
+            <div id="out_first_aid_text"></div>
+
+            <div class="reg-number">رقم التسجيل بالمملكة العربية السعودية</div>
+            <div class="reg-value" id="out_registration_value">( - - - )</div>
+
+            <table>
+              <tr>
+                <th>تاريخ الإنتاج</th>
+                <th>تاريخ الانتهاء</th>
+                <th>رقم الدفعة</th>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+
+            <div class="footer-company">
+              <div><span class="label">إنتاج:</span> <span id="out_manufacturer">فابكو</span></div>
+              <div><span class="label">الوكيل والموزعون:</span> <span id="out_agent">التكامل الوطنية</span></div>
+            </div>
+
+            <div class="logo-box">LOGO</div>
+
+            <div class="yellow-bar"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function escapeHtml(text) {
+      return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function textToParagraphs(text) {
+      const safe = escapeHtml(text);
+      const lines = safe.split("\n").filter(line => line.trim() !== "");
+      if (!lines.length) return "";
+      return lines.map(line => `<p class="section-text">${line}</p>`).join("");
+    }
+
+    function textToListOrParagraphs(text) {
+      const safe = escapeHtml(text);
+      const lines = safe.split("\n").filter(line => line.trim() !== "");
+      if (!lines.length) return "";
+
+      const allBullets = lines.every(line => line.trim().startsWith("•"));
+      if (allBullets) {
+        const items = lines.map(line => {
+          const cleaned = line.replace(/^•\s*/, "").trim();
+          return `<li>${cleaned}</li>`;
+        }).join("");
+        return `<ul class="section-list">${items}</ul>`;
+      }
+
+      return lines.map(line => `<p class="section-text">${line}</p>`).join("");
+    }
+
+    function getValue(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function generateLabel() {
+      const tradeNameAr = getValue("trade_name_ar");
+      const tradeNameEn = getValue("trade_name_en");
+      const concentration = getValue("concentration");
+      const formulation = getValue("formulation");
+      const activeAr = getValue("active_ar");
+      const registrationMode = getValue("registration_mode");
+      const registrationNumber = getValue("registration_number");
+      const manufacturer = getValue("manufacturer");
+      const agent = getValue("agent");
+      const propertiesText = getValue("properties_text");
+      const mixingText = getValue("mixing_text");
+      const storageText = getValue("storage_text");
+      const effectText = getValue("effect_text");
+      const symptomsText = getValue("symptoms_text");
+      const antidoteText = getValue("antidote_text");
+      const precautionsText = getValue("precautions_text");
+      const disposalText = getValue("disposal_text");
+      const warrantyText = getValue("warranty_text");
+      const firstAidText = getValue("first_aid_text");
+      const noteText = getValue("note_text");
+      const reiText = getValue("rei_text");
+      const groupText = getValue("group_text");
+      const pesticideTypeText = getValue("pesticide_type_text");
+
+      const finalNameAr = `${tradeNameAr} ${concentration} ${formulation === "WP" ? "دبليو بي" : formulation}`;
+      const finalNameEn = `${tradeNameEn} ${concentration} ${formulation}`.trim();
+
+      const productDesc = `مبيد حشري جهازي على هيئة مسحوق قابل للبلل (${formulation})`;
+
+      let regValue = "( - - - )";
+      if (registrationMode === "registered" && registrationNumber) {
+        regValue = registrationNumber;
+      }
+
+      const parsedPercent = parseFloat(concentration.replace("%", "").trim());
+      let additives = "";
+      if (!isNaN(parsedPercent)) {
+        additives = `${100 - parsedPercent}%`;
+      }
+
+      document.getElementById("out_group_text").textContent = groupText;
+      document.getElementById("out_pesticide_type_text").textContent = pesticideTypeText;
+
+      document.getElementById("out_trade_name_ar").textContent = finalNameAr;
+      document.getElementById("out_trade_name_en").textContent = finalNameEn;
+      document.getElementById("out_product_desc").textContent = productDesc;
+
+      document.getElementById("out_active_ar").textContent = activeAr;
+      document.getElementById("out_concentration_ar").textContent = concentration;
+      document.getElementById("out_concentration_ratio").textContent = concentration;
+      document.getElementById("out_active_en").textContent = activeAr.toUpperCase();
+      document.getElementById("out_additives_ar").textContent = additives || "75%";
+      document.getElementById("out_additives_ratio").textContent = additives || "75%";
+
+      document.getElementById("out_mixing_text").textContent = mixingText;
+      document.getElementById("out_storage_text").textContent = storageText;
+      document.getElementById("out_effect_text").textContent = effectText;
+      document.getElementById("out_symptoms_text").textContent = symptomsText;
+      document.getElementById("out_antidote_text").textContent = antidoteText;
+      document.getElementById("out_disposal_text").textContent = disposalText;
+      document.getElementById("out_warranty_text").textContent = warrantyText;
+
+      document.getElementById("out_properties_text").textContent = propertiesText;
+      document.getElementById("out_rei_text").textContent = reiText;
+
+      document.getElementById("out_precautions_text").innerHTML = textToListOrParagraphs(precautionsText);
+      document.getElementById("out_note_text").innerHTML = textToListOrParagraphs(noteText);
+      document.getElementById("out_first_aid_text").innerHTML = textToListOrParagraphs(firstAidText);
+
+      document.getElementById("out_registration_value").textContent = regValue;
+      document.getElementById("out_manufacturer").textContent = manufacturer;
+      document.getElementById("out_agent").textContent = agent;
+    }
+
+    generateLabel();
+  </script>
 </body>
 </html>
