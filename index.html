@@ -209,17 +209,11 @@
     .col {
       direction: rtl;
       position: relative;
-      padding: 4px 12px 44px 12px;
+      padding: 4px 12px 48px 12px;
       height: 100%;
       font-size: 12px;
       line-height: 1.42;
       color: #111;
-      overflow: hidden;
-    }
-
-    .col > * {
-      position: relative;
-      z-index: 1;
     }
 
     .col-left,
@@ -253,20 +247,15 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       border: 2px solid #000;
-      margin: 4px 0 10px 0;
+      margin: 4px 0 14px 0;
       text-align: center;
       font-weight: 700;
-      font-size: 11px;
-      line-height: 1;
+      font-size: 15px;
     }
 
     .cell {
-      padding: 3px 5px;
+      padding: 6px;
       border-left: 1px solid #000;
-      min-height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .cell:first-child {
@@ -314,36 +303,12 @@
     }
 
     .product-desc {
-      color: #111;
-      font-size: 9px;
+      color: #ff1d1d;
+      font-size: 11px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 8px;
-      line-height: 1.15;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      min-height: 12px;
-      direction: rtl;
-    }
-
-    .field textarea {
-      width: 100%;
-      border: 2px solid #cfcfcf;
-      border-radius: 14px;
-      background: #dcdcdc;
-      padding: 14px 18px;
-      font-size: 18px;
-      font-family: inherit;
-      outline: none;
-      min-height: 110px;
-      resize: vertical;
-      line-height: 1.6;
-    }
-
-    .field textarea:focus {
-      border-color: #999;
-      background: #e5e5e5;
+      margin-bottom: 10px;
+      line-height: 1.25;
     }
 
     table {
@@ -370,7 +335,6 @@
     .composition-table {
       font-size: 10px;
       table-layout: fixed;
-      direction: ltr;
     }
 
     .composition-table col.col-en { width: 37%; }
@@ -545,10 +509,8 @@
       right: 12px;
       left: 12px;
       bottom: 6px;
-      height: 20px;
+      height: 34px;
       background: #fff200;
-      z-index: 2;
-      display: block;
     }
 
     .hidden {
@@ -743,11 +705,6 @@
           <label for="agent_phone">تلفون المفوض</label>
           <input id="agent_phone" type="text" value="0114625322" placeholder="تلفون المفوض">
         </div>
-      </div>
-
-      <div class="field">
-        <label for="properties_text_input">خواص المبيد</label>
-        <textarea id="properties_text_input" placeholder="اكتب خواص المبيد هنا"></textarea>
       </div>
 
       <div class="field">
@@ -1450,7 +1407,7 @@
       document.getElementById("out_additives_ratio").textContent = `${additivesText} (${ratioUnit})`;
       document.getElementById("out_total_ratio").textContent = `100% (${ratioUnit})`;
 
-      document.getElementById("out_properties_text").textContent = getValue("properties_text_input");
+      document.getElementById("out_properties_text").textContent = `${categoryMeta.ar} على هيئة ${formulationAr} (${formulationCode})`;
       document.getElementById("out_mixing_text").textContent = STATIC_CONTENT.mixing;
       document.getElementById("out_storage_text").textContent = STATIC_CONTENT.storage;
       document.getElementById("out_effect_text").textContent = STATIC_CONTENT.effect;
