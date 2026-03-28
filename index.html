@@ -2,63 +2,64 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>ملصق بودرة</title>
+<title>ملصق مبيد</title>
 
 <style>
+@page {
+    size: A4 landscape;
+    margin: 10mm;
+}
+
 body {
     margin: 0;
     font-family: Tahoma;
-    background: #e9e9e9;
+    background: #e5e5e5;
 }
 
 .page {
-    width: 1200px;
-    margin: auto;
+    width: 297mm;
+    height: 210mm;
     background: white;
+    margin: auto;
     padding: 10px;
-    border: 1px solid #aaa;
+    box-sizing: border-box;
 }
 
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
+    height: 100%;
 }
 
+/* الأعمدة */
 .col {
-    border-left: 2px dashed #000;
     padding: 10px;
-    min-height: 900px;
+    border-left: 2px dashed black;
+    font-size: 13px;
 }
 
 .col:first-child {
     border-left: none;
 }
 
+/* العناوين */
 h3 {
     color: green;
-    margin: 5px 0;
+    margin: 6px 0;
 }
 
-.small {
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-.center {
-    text-align: center;
-}
-
-.title-bar {
+/* الشريط العلوي */
+.header {
     display: flex;
-    justify-content: space-between;
     border: 2px solid black;
     margin-bottom: 10px;
 }
 
-.title-bar div {
-    padding: 5px;
+.header div {
+    flex: 1;
+    text-align: center;
     font-weight: bold;
+    padding: 5px;
 }
 
 .group {
@@ -66,18 +67,15 @@ h3 {
     color: white;
 }
 
-.insect {
-    background: #ddd;
-}
-
-.product-name-ar {
+/* اسم المبيد */
+.name-ar {
     color: green;
     font-size: 28px;
     font-weight: bold;
     text-align: right;
 }
 
-.product-name-en {
+.name-en {
     color: green;
     font-size: 24px;
     font-weight: bold;
@@ -90,27 +88,36 @@ h3 {
     text-align: right;
 }
 
-.table {
+/* الجداول */
+table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 12px;
 }
 
-.table th, .table td {
+table td, table th {
     border: 1px solid black;
     padding: 5px;
 }
 
+/* تحذير */
 .warning {
     text-align: center;
     color: red;
     font-weight: bold;
 }
 
+/* الشريط الأصفر */
 .yellow {
     background: yellow;
-    height: 45px;
+    height: 40px;
     margin-top: 10px;
+}
+
+/* نقاط */
+ul {
+    margin: 0;
+    padding-right: 15px;
 }
 </style>
 
@@ -123,7 +130,7 @@ h3 {
 <div class="container">
 
 <!-- العمود الأيسر -->
-<div class="col small">
+<div class="col">
 
 <h3>قابلية الخلط:</h3>
 <p>يمكن خلطه مع عدد من المبيدات الحشرية ويجب الرش مباشرة بعد الخلط...</p>
@@ -138,16 +145,16 @@ h3 {
 <p>قيء، اضطراب أعصاب، رعشة عضلية...</p>
 
 <h3>مضاد التسمم:</h3>
-<p>لا يوجد ترياق محدد ويتم العلاج حسب الأعراض.</p>
+<p>لا يوجد ترياق ويتم العلاج حسب الأعراض.</p>
 
 <h3>احتياطات:</h3>
 <ul>
 <li>ارتداء معدات الوقاية</li>
-<li>عدم الأكل أو الشرب أثناء الاستخدام</li>
+<li>عدم الأكل أو الشرب</li>
 </ul>
 
 <h3>التخلص من العبوات:</h3>
-<p>غسل العبوة ثلاث مرات والتخلص منها في الأماكن المخصصة.</p>
+<p>غسل العبوة ثلاث مرات والتخلص منها.</p>
 
 <h3>الضمان:</h3>
 <p>تضمن الشركة المنتج في عبواته الأصلية.</p>
@@ -157,16 +164,14 @@ h3 {
 </div>
 
 <!-- العمود الأوسط -->
-<div class="col small">
+<div class="col">
 
 <h3>الخواص:</h3>
-<p>
-مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP)
-</p>
+<p>مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP)</p>
 
 <h3>معدل الاستخدام:</h3>
 
-<table class="table">
+<table>
 <tr>
 <th>المحصول</th>
 <th>الآفة</th>
@@ -184,9 +189,7 @@ h3 {
 </table>
 
 <h3>ملاحظة:</h3>
-<p>
-بعض النباتات حساسة للمبيد ويجب إجراء تجربة مصغرة.
-</p>
+<p>بعض النباتات حساسة للمبيد.</p>
 
 <h3>فترة إعادة الدخول:</h3>
 <p>12 ساعة</p>
@@ -196,20 +199,15 @@ h3 {
 </div>
 
 <!-- العمود الأيمن -->
-<div class="col small">
+<div class="col">
 
-<div class="title-bar">
-<div class="insect">INSECTICIDE</div>
+<div class="header">
+<div>INSECTICIDE</div>
 <div class="group">GROUP 4A</div>
 </div>
 
-<div class="product-name-ar">
-اسم المبيد 00% دبليو بي
-</div>
-
-<div class="product-name-en">
-NAME 00% WP
-</div>
+<div class="name-ar">اسم المبيد 25% دبليو بي</div>
+<div class="name-en">ACOCHEM 25% WP</div>
 
 <p class="desc">
 مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP)
@@ -217,7 +215,7 @@ NAME 00% WP
 
 <h3>التركيب:</h3>
 
-<table class="table">
+<table>
 <tr>
 <th>Composition</th>
 <th>Ratio</th>
@@ -225,9 +223,15 @@ NAME 00% WP
 </tr>
 
 <tr>
-<td>Imidacloprid</td>
+<td>IMIDACLOPRID</td>
 <td>25%</td>
 <td>25%</td>
+</tr>
+
+<tr>
+<td>Additives</td>
+<td>75%</td>
+<td>75%</td>
 </tr>
 
 </table>
@@ -238,14 +242,12 @@ NAME 00% WP
 </div>
 
 <h3>الإسعافات الأولية:</h3>
-<p>
-غسل العين 15 دقيقة... نقل المصاب لمكان جيد التهوية...
-</p>
+<p>غسل العين 15 دقيقة...</p>
 
-<h3>رقم التسجيل بالمملكة:</h3>
+<h3>رقم التسجيل:</h3>
 <p>( - - - )</p>
 
-<table class="table">
+<table>
 <tr>
 <th>تاريخ الإنتاج</th>
 <th>تاريخ الانتهاء</th>
