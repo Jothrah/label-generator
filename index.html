@@ -98,6 +98,63 @@
       line-height: 1.6;
     }
 
+    .active-select {
+      direction: ltr;
+      text-align: left;
+      font-size: 18px !important;
+    }
+
+    .active-preview {
+      margin-top: 8px;
+      border: 1px solid #cfcfcf;
+      border-radius: 12px;
+      background: #ededed;
+      padding: 10px 14px;
+      line-height: 1.6;
+    }
+
+    .active-preview-ar {
+      font-size: 18px;
+      font-weight: 700;
+      direction: rtl;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .active-preview-en {
+      font-size: 16px;
+      direction: ltr;
+      text-align: left;
+      word-break: break-word;
+      margin-top: 4px;
+    }
+
+    .upload-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .upload-btn {
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 16px;
+      font-family: inherit;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .upload-filename {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
     .btn-row {
       display: flex;
       gap: 12px;
@@ -237,6 +294,7 @@
       font-weight: 700;
       line-height: 1.12;
       margin: 0 0 4px 0;
+      word-break: break-word;
     }
 
     .product-name-en {
@@ -246,6 +304,7 @@
       line-height: 1.12;
       margin: 0 0 10px 0;
       direction: ltr;
+      word-break: break-word;
     }
 
     .product-desc {
@@ -265,12 +324,15 @@
       border-collapse: collapse;
       margin-bottom: 10px;
       font-size: 12px;
+      table-layout: fixed;
     }
 
     th, td {
       border: 1px solid #000;
       padding: 4px 6px;
       vertical-align: middle;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     th {
@@ -323,28 +385,26 @@
       font-weight: 700;
     }
 
-    .logo-box {
-      margin-top: 10px;
-      text-align: center;
-      min-height: 72px;
+    .agent-logo-inline {
+      margin-top: 8px;
+      border: 1px dashed #bbb;
+      min-height: 58px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px dashed #bbb;
-      padding: 8px;
-      overflow: hidden;
+      padding: 6px;
     }
 
-    .logo-box img {
+    .agent-logo-inline img {
       max-width: 100%;
-      max-height: 68px;
+      max-height: 52px;
       object-fit: contain;
       display: block;
     }
 
-    .logo-placeholder {
-      color: #666;
-      font-size: 13px;
+    .agent-logo-placeholder {
+      color: #777;
+      font-size: 12px;
       font-weight: 700;
     }
 
@@ -444,8 +504,12 @@
 
       <div class="field">
         <label for="active_select">المادة الفعالة</label>
-        <select id="active_select"></select>
-        <div class="field-note">القائمة تحتوي الاسم العربي والإنجليزي</div>
+        <select id="active_select" class="active-select"></select>
+        <div class="active-preview">
+          <div class="active-preview-ar" id="active_preview_ar">إيميداكلوبريد</div>
+          <div class="active-preview-en" id="active_preview_en">Imidacloprid</div>
+        </div>
+        <div class="field-note">عرض المادة المختارة هنا بشكل مرتب على سطرين</div>
       </div>
 
       <div class="grid-2">
@@ -476,9 +540,13 @@
       </div>
 
       <div class="field">
-        <label for="agent_logo">شعار الوكيل الحصري</label>
-        <input id="agent_logo" type="file" accept="image/*">
-        <div class="field-note">ارفع الشعار، وسيظهر مباشرة داخل النموذج</div>
+        <label>شعار الوكيل الحصري</label>
+        <div class="upload-row">
+          <button type="button" class="upload-btn" onclick="document.getElementById('agent_logo').click()">رفع الشعار</button>
+          <span class="upload-filename" id="logo_filename">لم يتم اختيار ملف</span>
+        </div>
+        <input id="agent_logo" type="file" accept="image/*" style="display:none;">
+        <div class="field-note">بعد الرفع سيظهر الشعار تحت اسم الوكيل داخل النموذج</div>
       </div>
 
       <div class="btn-row">
@@ -491,7 +559,6 @@
       <div class="sheet" id="labelSheet">
         <div class="columns">
 
-          <!-- العمود الأيسر -->
           <div class="col col-left">
             <h3 class="section-title">قابلية الخلط:</h3>
             <p class="section-text" id="out_mixing_text"></p>
@@ -520,7 +587,6 @@
             <div class="yellow-bar"></div>
           </div>
 
-          <!-- العمود الأوسط -->
           <div class="col col-middle">
             <h3 class="section-title">الخواص:</h3>
             <p class="section-text" id="out_properties_text"></p>
@@ -550,7 +616,6 @@
             <div class="yellow-bar"></div>
           </div>
 
-          <!-- العمود الأيمن -->
           <div class="col col-right">
             <div class="top-strip">
               <div class="cell light">GROUP</div>
@@ -564,7 +629,7 @@
             </div>
 
             <div class="product-desc" id="out_product_desc">
-              مبيد حشري جهازي على هيئة مسحوق قابل للبلل (WP)
+              مبيد حشري على هيئة مسحوق قابل للبلل (WP)
             </div>
 
             <h3 class="section-title">التركيب:</h3>
@@ -622,10 +687,9 @@
             <div class="footer-company">
               <div><span class="label">إنتاج:</span> <span id="out_manufacturer">فابكو</span></div>
               <div><span class="label">الوكيل والموزعون:</span> <span id="out_agent">التكامل الوطنية</span></div>
-            </div>
-
-            <div class="logo-box" id="logo_box">
-              <span class="logo-placeholder">شعار الوكيل الحصري</span>
+              <div class="agent-logo-inline" id="agent_logo_inline">
+                <span class="agent-logo-placeholder">شعار الوكيل الحصري</span>
+              </div>
             </div>
 
             <div class="yellow-bar"></div>
@@ -639,194 +703,38 @@
 
   <script>
     const FORMULATIONS = [
-      {
-        code: "CS",
-        ar: "كبسولات معلقة",
-        en: "Capsule suspension",
-        def: "معلق ثابت من كبسولات في سائل تستخدم عادة بعد التخفيف بالماء.",
-        type: "liquid"
-      },
-      {
-        code: "DC",
-        ar: "مركز قابل للانتشار",
-        en: "Dispersible concentrate",
-        def: "سائل متجانس لمادة صلبة قابلة للانتشار عند التخفيف.",
-        type: "liquid"
-      },
-      {
-        code: "DP",
-        ar: "مسحوق تعفير",
-        en: "Dustable powder",
-        def: "مسحوق قابل للتعفير.",
-        type: "powder"
-      },
-      {
-        code: "EC",
-        ar: "مركز قابل للاستحلاب",
-        en: "Emulsifiable concentrate",
-        def: "سائل متجانس يستخدم كمستحلب عند التخفيف بالماء.",
-        type: "liquid"
-      },
-      {
-        code: "EW",
-        ar: "مستحلب زيت في الماء",
-        en: "Emulsion oil in water",
-        def: "سائل غير متجانس يحتوي على محلول المبيد في مذيب عضوي مكوناً كريات زيتية منتشرة في الوسط المائي.",
-        type: "liquid"
-      },
-      {
-        code: "FS",
-        ar: "مركز انسيابي لمعاملة البذور",
-        en: "Flowable concentrate for seed",
-        def: "معلق ثابت لمعاملة البذور مباشرة أو بعد التخفيف بالماء.",
-        type: "liquid"
-      },
-      {
-        code: "GR",
-        ar: "حبيبات",
-        en: "Granules",
-        def: "حبات صلبة انسيابية ذات مجال حجمي محدد للاستخدام المباشر.",
-        type: "powder"
-      },
-      {
-        code: "ME",
-        ar: "مستحلب دقيق",
-        en: "Micro emulsion",
-        def: "مركز سائل رائق يحتوي على زيت وماء يستخدم مباشرة أو بعد التخفيف بالماء مكوناً مستحلباً دقيقاً أو مستحلباً عالياً.",
-        type: "liquid"
-      },
-      {
-        code: "OD",
-        ar: "مركز زيتي قابل للانتشار",
-        en: "Oil dispersion",
-        def: "معلق ثابت للمادة الفعالة في سائل غير ممتزج بالماء وقد يحتوي على مواد فعالة أخرى وينتشر عند التخفيف بالماء.",
-        type: "liquid"
-      },
-      {
-        code: "SC",
-        ar: "معلقة مركز",
-        en: "Suspension concentrate",
-        def: "معلق ثابت من المادة الفعالة يخفف بالماء عند الاستخدام.",
-        type: "liquid"
-      },
-      {
-        code: "SE",
-        ar: "معلق مستحلب",
-        en: "Suspo-emulsion",
-        def: "سائل غير متجانس يحتوي على مادة فعالة منتشرة في صورة كريات في الوسط المائي.",
-        type: "liquid"
-      },
-      {
-        code: "SG",
-        ar: "حبيبات قابلة للذوبان في الماء",
-        en: "Water soluble granules",
-        def: "مستحلب في صورة حبيبات تذوب في الماء مكونة محلولاً حقيقياً.",
-        type: "powder"
-      },
-      {
-        code: "SL",
-        ar: "مركز قابل للذوبان",
-        en: "Soluble concentrate",
-        def: "سائل رائق متآلف يستخدم كمحلول حقيقي من المادة الفعالة بعد التخفيف بالماء.",
-        type: "liquid"
-      },
-      {
-        code: "SP",
-        ar: "مسحوق قابل للذوبان في الماء",
-        en: "Water soluble powder",
-        def: "مسحوق قابل للذوبان في الماء عند الاستخدام.",
-        type: "powder"
-      },
-      {
-        code: "ST",
-        ar: "أقراص قابلة للذوبان في الماء",
-        en: "Water soluble tablets",
-        def: "أقراص قابلة للذوبان في الماء تستخدم في صورة مكونة محلول مائي.",
-        type: "powder"
-      },
-      {
-        code: "UL",
-        ar: "محلول رش متناهي الصغر",
-        en: "Ultra low volume liquid",
-        def: "محلول متجانس يستخدم بالات متخصصة في الرش متناهي الصغر.",
-        type: "liquid"
-      },
-      {
-        code: "WG",
-        ar: "حبيبات قابلة للانتشار في الماء",
-        en: "Water dispersible granules",
-        def: "حبيبات تتفكك وتنتشر عند خلطها بالماء.",
-        type: "powder"
-      },
-      {
-        code: "WP",
-        ar: "مسحوق قابل للبلل",
-        en: "Wettable powder",
-        def: "مسحوق يستخدم كمعلق بعد انتشاره في الماء.",
-        type: "powder"
-      },
-      {
-        code: "WS",
-        ar: "مسحوق قابل للانتشار في الماء لمعاملة البذور",
-        en: "Water dispersible powder for slurry seed treatment",
-        def: "مسحوق ينتشر بتركيزات عالية في الماء قبل استخدامه على البذور في شكل عجينة.",
-        type: "powder"
-      },
-      {
-        code: "ZC",
-        ar: "مستحضر مخلوط من كبسولات معلقة ومعلقات مركزة",
-        en: "A mixed formulation of CS and SC",
-        def: "معلق ثابت من كبسولات معلقة ومعلقات مركزة تستخدم بعد التخفيف بالماء.",
-        type: "liquid"
-      }
+      { code: "CS", ar: "كبسولات معلقة", en: "Capsule suspension", def: "معلق ثابت من كبسولات في سائل تستخدم عادة بعد التخفيف بالماء.", type: "liquid" },
+      { code: "DC", ar: "مركز قابل للانتشار", en: "Dispersible concentrate", def: "سائل متجانس لمادة صلبة قابلة للانتشار عند التخفيف.", type: "liquid" },
+      { code: "DP", ar: "مسحوق تعفير", en: "Dustable powder", def: "مسحوق قابل للتعفير.", type: "powder" },
+      { code: "EC", ar: "مركز قابل للاستحلاب", en: "Emulsifiable concentrate", def: "سائل متجانس يستخدم كمستحلب عند التخفيف بالماء.", type: "liquid" },
+      { code: "EW", ar: "مستحلب زيت في الماء", en: "Emulsion oil in water", def: "سائل غير متجانس يحتوي على محلول المبيد في مذيب عضوي مكوناً كريات زيتية منتشرة في الوسط المائي.", type: "liquid" },
+      { code: "FS", ar: "مركز انسيابي لمعاملة البذور", en: "Flowable concentrate for seed", def: "معلق ثابت لمعاملة البذور مباشرة أو بعد التخفيف بالماء.", type: "liquid" },
+      { code: "GR", ar: "حبيبات", en: "Granules", def: "حبات صلبة انسيابية ذات مجال حجمي محدد للاستخدام المباشر.", type: "powder" },
+      { code: "ME", ar: "مستحلب دقيق", en: "Micro emulsion", def: "مركز سائل رائق يحتوي على زيت وماء يستخدم مباشرة أو بعد التخفيف بالماء.", type: "liquid" },
+      { code: "OD", ar: "مركز زيتي قابل للانتشار", en: "Oil dispersion", def: "معلق ثابت للمادة الفعالة في سائل غير ممتزج بالماء وينتشر عند التخفيف.", type: "liquid" },
+      { code: "SC", ar: "معلقة مركز", en: "Suspension concentrate", def: "معلق ثابت من المادة الفعالة يخفف بالماء عند الاستخدام.", type: "liquid" },
+      { code: "SE", ar: "معلق مستحلب", en: "Suspo-emulsion", def: "سائل غير متجانس يحتوي على مادة فعالة منتشرة في صورة كريات في الوسط المائي.", type: "liquid" },
+      { code: "SG", ar: "حبيبات قابلة للذوبان في الماء", en: "Water soluble granules", def: "حبيبات تذوب في الماء مكونة محلولاً حقيقياً.", type: "powder" },
+      { code: "SL", ar: "مركز قابل للذوبان", en: "Soluble concentrate", def: "سائل رائق متآلف يستخدم كمحلول حقيقي بعد التخفيف بالماء.", type: "liquid" },
+      { code: "SP", ar: "مسحوق قابل للذوبان في الماء", en: "Water soluble powder", def: "مسحوق قابل للذوبان في الماء عند الاستخدام.", type: "powder" },
+      { code: "ST", ar: "أقراص قابلة للذوبان في الماء", en: "Water soluble tablets", def: "أقراص قابلة للذوبان في الماء.", type: "powder" },
+      { code: "UL", ar: "محلول رش متناهي الصغر", en: "Ultra low volume liquid", def: "محلول متجانس يستخدم بالات متخصصة في الرش متناهي الصغر.", type: "liquid" },
+      { code: "WG", ar: "حبيبات قابلة للانتشار في الماء", en: "Water dispersible granules", def: "حبيبات تتفكك وتنتشر عند خلطها بالماء.", type: "powder" },
+      { code: "WP", ar: "مسحوق قابل للبلل", en: "Wettable powder", def: "مسحوق يستخدم كمعلق بعد انتشاره في الماء.", type: "powder" },
+      { code: "WS", ar: "مسحوق قابل للانتشار في الماء لمعاملة البذور", en: "Water dispersible powder for slurry seed treatment", def: "مسحوق ينتشر بتركيزات عالية في الماء قبل استخدامه على البذور في شكل عجينة.", type: "powder" },
+      { code: "ZC", ar: "مستحضر مخلوط من كبسولات معلقة ومعلقات مركزة", en: "A mixed formulation of CS and SC", def: "معلق ثابت من كبسولات معلقة ومعلقات مركزة تستخدم بعد التخفيف بالماء.", type: "liquid" }
     ];
 
     const CATEGORY_META = {
-      insecticide: {
-        ar: "مبيد حشري",
-        en: "INSECTICIDE",
-        defaultGroup: "4A"
-      },
-      acaricide: {
-        ar: "مبيد أكاروسي",
-        en: "ACARICIDE",
-        defaultGroup: ""
-      },
-      fungicide: {
-        ar: "مبيد فطري",
-        en: "FUNGICIDE",
-        defaultGroup: ""
-      },
-      herbicide: {
-        ar: "مبيد أعشاب",
-        en: "HERBICIDE",
-        defaultGroup: ""
-      },
-      nematicide: {
-        ar: "مبيد نيماتودي",
-        en: "NEMATICIDE",
-        defaultGroup: ""
-      },
-      growth_regulator: {
-        ar: "منظم نمو نباتي",
-        en: "PLANT GROWTH REGULATOR",
-        defaultGroup: ""
-      },
-      molluscicide: {
-        ar: "مبيد قواقع",
-        en: "MOLLUSCICIDE",
-        defaultGroup: ""
-      },
-      adjuvant: {
-        ar: "مادة مساعدة / ناشرة",
-        en: "ADJUVANT",
-        defaultGroup: ""
-      },
-      attractant_repellent: {
-        ar: "مادة جاذبة / طاردة",
-        en: "ATTRACTANT / REPELLENT",
-        defaultGroup: ""
-      }
+      insecticide: { ar: "مبيد حشري", en: "INSECTICIDE" },
+      acaricide: { ar: "مبيد أكاروسي", en: "ACARICIDE" },
+      fungicide: { ar: "مبيد فطري", en: "FUNGICIDE" },
+      herbicide: { ar: "مبيد أعشاب", en: "HERBICIDE" },
+      nematicide: { ar: "مبيد نيماتودي", en: "NEMATICIDE" },
+      growth_regulator: { ar: "منظم نمو نباتي", en: "PLANT GROWTH REGULATOR" },
+      molluscicide: { ar: "مبيد قواقع", en: "MOLLUSCICIDE" },
+      adjuvant: { ar: "مادة مساعدة / ناشرة", en: "ADJUVANT" },
+      attractant_repellent: { ar: "مادة جاذبة / طاردة", en: "ATTRACTANT / REPELLENT" }
     };
 
     const ACTIVE_INGREDIENTS = [
@@ -1012,12 +920,12 @@
 
       { cat: "المواد المساعدة والناشرة", en: "Alcohol Ethoxylat, AlkylPhenol Ethoxylate", ar: "الكيل الكحول إيثوكسيلات" },
       { cat: "المواد المساعدة والناشرة", en: "polyether Polysiloxane", ar: "بولي إيثر بولي سيلوكسـان" },
-      { cat: "المواد المساعدة والناشرة", en: "Glycol Ethoxylate + Polydimethylsiloxane", ar: "جلايكول إيثوكسيلات + ثنائي ميثيل سيليوگزان" },
+      { cat: "المواد المساعدة والناشرة", en: "Glycol Ethoxylate + Polydimethylsiloxane", ar: "جلايكول إيثوكسيلات + ثنائي ميثيل سيلوكزان" },
 
       { cat: "المواد الجاذبة والطاردة", en: "Hydrolysed proteins", ar: "البروتينات المتحللة بالماء" },
       { cat: "المواد الجاذبة والطاردة", en: "(E,Z,Z)-3,8,11-Tetradecatrienyl acetate", ar: "(إي زد زد) 3,8,11-تتراديكاترينيـل أسيتات" },
       { cat: "المواد الجاذبة والطاردة", en: "(3E;8Z;11Z)-3,8-tetradecatrien-1-yl acetate and (3E,8Z tetradecadien-1-yl acetate), (E,Z)-3,8-tetradecatrienyl acetate", ar: "(3E;8Z;11Z)-3,8 تترديكاترين 1-يل أسيتات و (3E,8Z تترديكادين-1-يل أسيتات) , (E,Z)-3,8 تترديكاترينيل أسيتات" },
-      { cat: "المواد الجاذبة والطاردة", en: "(3E;8Z;11Z)-3,8-tetradecatrien-1-yl acetate and (3E,8Z tetradecadien-1-yl acetate), (E,Z)-3,8-tetradecatrienyl acetate +", ar: "(3E;8Z;11Z)-3,8 تترديكاترين 1-يل أسيتات و (3E,8Z تترديكادين-1-يل أسيتات) + ..." },
+      { cat: "المواد الجاذبة والطاردة", en: "(3E;8Z;11Z)-3,8-tetradecatrien-1-yl acetate and (3E,8Z tetradecadien-1-yl acetate), (E,Z)-3,8-tetradecatrienyl acetate +", ar: "(3E;8Z;11Z)-3,8 تترديكاترين 1-يل أسيتات و (3E,8Z تترديكادين-1-يل أسيتات) +" },
       { cat: "المواد الجاذبة والطاردة", en: "4-Methyl-5-Nonanol + 4-Methyl-5-Nonanone", ar: "4 ميثيل -5 نونانول + 4 ميثيل -5 نونانون" }
     ];
 
@@ -1082,12 +990,19 @@
         groups[cat].forEach(item => {
           const value = encodeURIComponent(JSON.stringify(item));
           const selected = item.en === "Imidacloprid" ? "selected" : "";
-          html += `<option value="${value}" ${selected}>${item.ar} — ${item.en}</option>`;
+          html += `<option value="${value}" ${selected}>${item.en} — ${item.ar}</option>`;
         });
         html += `</optgroup>`;
       });
 
       select.innerHTML = html;
+      updateActivePreview();
+    }
+
+    function updateActivePreview() {
+      const active = getSelectedActive();
+      document.getElementById("active_preview_ar").textContent = active.ar || "";
+      document.getElementById("active_preview_en").textContent = active.en || "";
     }
 
     function escapeHtml(text) {
@@ -1147,13 +1062,6 @@
       const input = document.getElementById("registration_number");
       input.disabled = mode !== "registered";
       if (mode !== "registered") input.value = "";
-    }
-
-    function updateCategoryDefaults() {
-      const key = document.getElementById("pesticide_category").value;
-      const meta = CATEGORY_META[key];
-      if (!meta) return;
-      document.getElementById("group_text").value = document.getElementById("group_text").value || meta.defaultGroup;
     }
 
     function buildProductDescription(categoryKey, formulationCode) {
@@ -1236,21 +1144,26 @@
       document.getElementById("out_manufacturer").textContent = manufacturer;
       document.getElementById("out_agent").textContent = agent;
 
-      const logoBox = document.getElementById("logo_box");
+      const agentLogoBox = document.getElementById("agent_logo_inline");
       if (logoDataUrl) {
-        logoBox.innerHTML = `<img src="${logoDataUrl}" alt="Agent Logo">`;
+        agentLogoBox.innerHTML = `<img src="${logoDataUrl}" alt="Agent Logo">`;
       } else {
-        logoBox.innerHTML = `<span class="logo-placeholder">شعار الوكيل الحصري</span>`;
+        agentLogoBox.innerHTML = `<span class="agent-logo-placeholder">شعار الوكيل الحصري</span>`;
       }
     }
 
     logoInput.addEventListener("change", function (event) {
       const file = event.target.files && event.target.files[0];
+      const nameBox = document.getElementById("logo_filename");
+
       if (!file) {
         logoDataUrl = "";
+        nameBox.textContent = "لم يتم اختيار ملف";
         generateLabel();
         return;
       }
+
+      nameBox.textContent = file.name;
 
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -1271,6 +1184,11 @@
     });
 
     document.getElementById("pesticide_category").addEventListener("change", function () {
+      generateLabel();
+    });
+
+    document.getElementById("active_select").addEventListener("change", function () {
+      updateActivePreview();
       generateLabel();
     });
 
