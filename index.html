@@ -446,6 +446,19 @@
       margin: 8px 0 10px 0;
     }
 
+    .effect-warning-icon-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 6px 0 10px 0;
+    }
+
+    .effect-warning-icon-wrap .warning-icon {
+      width: 26px;
+      height: 26px;
+      font-size: 12px;
+    }
+
     .registration-alert {
       color: #ff1d1d;
       font-size: 11px;
@@ -549,7 +562,11 @@
     .yellow-bar {
       margin: 8px 12px 0 12px;
       height: 28px;
-      background: #fff200;
+      display: block;
+      width: calc(100% - 24px);
+      object-fit: fill;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
     }
 
     .hidden {
@@ -786,6 +803,9 @@
 
             <h3 class="section-title">الأثر على الإنسان والبيئة والحيوان:</h3>
             <p class="section-text" id="out_effect_text"></p>
+            <div class="effect-warning-icon-wrap">
+              <div class="warning-icon"><span>🐝</span></div>
+            </div>
 
             <h3 class="section-title">أعراض التسمم:</h3>
             <p class="section-text" id="out_symptoms_text"></p>
@@ -898,7 +918,6 @@
             <div class="warning-icons">
               <div class="warning-icon"><span>☠</span></div>
               <div class="warning-icon"><span>🌳</span></div>
-              <div class="warning-icon"><span>🐝</span></div>
             </div>
 
             <div class="warning-text">
@@ -941,7 +960,7 @@
           </div>
 
         </div>
-        <div class="yellow-bar hidden-print"></div>
+        <img class="yellow-bar" alt="" aria-hidden="true" src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="28" viewBox="0 0 2000 28" preserveAspectRatio="none"><rect width="2000" height="28" fill="%23fff200"/></svg>">
       </div>
     </div>
 
